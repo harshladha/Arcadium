@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -11,7 +10,7 @@
   <!-- Header -->
   <header class="header">
     <div class="logo-circle">
-      <img src="/assets/images/arcadium-logo.svg.svg" alt="Arcadium Logo" id="logo" />
+      <img src="assets/images/arcadium-logo.svg.svg" alt="Arcadium Logo" id="logo"/>
     </div>
     <nav>
       <a href="index.html"><button class="header-btn">Home</button></a>
@@ -21,22 +20,23 @@
     </nav>
   </header>
 
-   <!-- Leaderboards Grid -->
+  <!-- Leaderboards Grid -->
   <main class="leaderboard-container">
     <h1>Game Leaderboards</h1>
     <div class="leaderboard-grid">
-      <!-- Tile Example: Tic Tac Toe -->
+      <!-- Tic Tac Toe -->
       <div class="leaderboard-tile" data-game="tictactoe">
-        <img src="assets/images/tic-tac-toe.png" alt="Tic Tac Toe" />
+        <img src="assets/images/tic-tac-toe.png" alt="Tic Tac Toe"/>
         <span>Tic Tac Toe</span>
       </div>
-      <!-- You can add more tiles for other games -->
+      <!-- Rock Paper Scissors -->
       <div class="leaderboard-tile" data-game="rockpaperscissors">
-        <img src="assets/images/rock-paper-scissors.png" alt="Rock Paper Scissors" />
+        <img src="assets/images/rock-paper-scissors.png" alt="Rock Paper Scissors"/>
         <span>Rock Paper Scissors</span>
       </div>
+      <!-- Snake -->
       <div class="leaderboard-tile" data-game="snake">
-        <img src="assets/images/snake-icon.svg" alt="Snake" />
+        <img src="assets/images/snake-icon.svg" alt="Snake"/>
         <span>Snake</span>
       </div>
     </div>
@@ -52,86 +52,19 @@
       <button id="closeModal">Close</button>
     </div>
   </div>
+
   <script src="js/stats.js"></script>
   <script src="js/leaderboard.js"></script>
   <script>
     // Navigation
     function goHome() {
-      window.location.href = "/index.html";
+      window.location.href = "index.html";
     }
   </script>
+
   <!-- Footer -->
   <footer>
     &copy; 2025 Arcadium. All rights reserved.
   </footer>
 </body>
 </html>
-=======
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Leaderboard</title>
-  <link rel="stylesheet" href="css/leaderboard.css"/>
-</head>
-<body>
-  <!-- Header -->
-  <header class="header">
-    <div class="logo-circle">
-      <img src="/assets/images/arcadium-logo.svg.svg" alt="Arcadium Logo" id="logo" />
-    </div>
-    <nav>
-      <a href="index.html"><button class="header-btn">Home</button></a>
-      <a href="games.html"><button class="header-btn">Games</button></a>
-      <a href="leaderboard.html"><button class="header-btn">Leaderboard</button></a>
-      <a href="about.html"><button class="header-btn">About</button></a>
-    </nav>
-  </header>
-
-   <!-- Leaderboards Grid -->
-  <main class="leaderboard-container">
-    <h1>Game Leaderboards</h1>
-    <div class="leaderboard-grid">
-      <!-- Tile Example: Tic Tac Toe -->
-      <div class="leaderboard-tile" data-game="tictactoe">
-        <img src="/assets/images/tic-tac-toe.png" alt="Tic Tac Toe" />
-        <span>Tic Tac Toe</span>
-      </div>
-      <!-- You can add more tiles for other games -->
-      <div class="leaderboard-tile" data-game="rockpaperscissors">
-        <img src="/assets/images/rock-paper-scissors.png" alt="Rock Paper Scissors" />
-        <span>Rock Paper Scissors</span>
-      </div>
-      <div class="leaderboard-tile" data-game="snake">
-        <img src="/assets/images/snake-icon.svg" alt="Snake" />
-        <span>Snake</span>
-      </div>
-    </div>
-  </main>
-
-  <!-- Modal Overlay -->
-  <div class="modal-overlay hide" id="leaderboardModal">
-    <div class="modal-content">
-      <h2 id="modalTitle">Game Stats</h2>
-      <dl id="statsList">
-        <!-- Stats will be injected here -->
-      </dl>
-      <button id="closeModal">Close</button>
-    </div>
-  </div>
-  <script src="js/stats.js"></script>
-  <script src="js/leaderboard.js"></script>
-  <script>
-    // Navigation
-    function goHome() {
-      window.location.href = "/index.html";
-    }
-  </script>
-  <!-- Footer -->
-  <footer>
-    &copy; 2025 Arcadium. All rights reserved.
-  </footer>
-</body>
-</html>
->>>>>>> 3fdfa406fdef56ab60ab4007b2ae026cb92dcd78
