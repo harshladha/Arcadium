@@ -1,0 +1,214 @@
+/* Reset default styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Body styling */
+body {
+  font-family: 'Poppins', sans-serif;
+  background-color: #0A0A23; /* Dark background */
+  color: #FFFFFF;
+  line-height: 1.6;
+}
+
+/* Header styling (universal) */
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: linear-gradient(90deg, #0052D4, #4364F7, #6FB1FC);
+  padding: 10px 30px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+  flex-wrap: wrap; /* Responsive wrap */
+  min-height: 80px; /* Lock height */
+}
+
+/* Logo Circle (universal) */
+.logo-circle {
+  width: 70px;
+  height: 70px;
+  background-color: #FFFFFF;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+}
+
+.logo-circle img {
+  width: 60%;
+  height: 60%;
+  object-fit: contain;
+}
+
+/* Navigation Buttons Container */
+.header nav {
+  display: flex;
+  gap: 15px;
+  flex-wrap: wrap;
+}
+
+/* Header Buttons */
+.header-btn {
+  background-color: rgba(255, 255, 255, 0.1);
+  color: #FFFFFF;
+  padding: 8px 18px;
+  border: none;
+  border-radius: 12px;
+  font-weight: 500;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.header-btn:hover {
+  background-color: rgba(255, 255, 255, 0.3);
+  transform: scale(1.05);
+}
+
+
+/* Hero Section */
+.hero {
+  text-align: center;
+  padding: 80px 20px;
+  background: linear-gradient(180deg, #0052D4, #4364F7);
+}
+
+.hero h1 {
+  font-size: 2.5rem;
+  margin-bottom: 20px;
+}
+
+.hero p {
+  font-size: 1.2rem;
+  margin-bottom: 30px;
+}
+
+.play-btn {
+  background-color: #00B4DB;
+  color: #FFFFFF;
+  padding: 12px 30px;
+  border-radius: 30px;
+  text-decoration: none;
+  font-weight: 600;
+  display: inline-block;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.play-btn:hover {
+  background-color: #009ACD;
+  transform: scale(1.05);
+}
+
+/* Featured Section */
+.featured {
+  padding: 40px 20px;
+  text-align: center;
+}
+
+/* Featured Section Heading */
+.featured h2 {
+  font-size: 2rem;
+  margin-bottom: 30px;
+}
+
+/* Grid Container */
+.games-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 20px;
+  max-width: 1000px;      /* Limit overall width */
+  margin: 0 auto;         /* Center the grid */
+  width: 100%;
+}
+
+/* Individual Game Card */
+.game-card {
+  background-color: #001f3f;
+  border-radius: 12px;
+  padding: 15px;
+  text-align: center;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+  transition: transform 0.2s ease, box-shadow 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 280px;  /* Consistent height */
+}
+
+/* Card Hover */
+.game-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 16px rgba(0,0,0,0.4);
+}
+
+/* Game Image */
+.game-card img {
+  width: 100%;
+  height: 150px;
+  object-fit: contain;
+  border-radius: 8px;
+}
+
+/* Game Title */
+.game-card h3 {
+  font-size: 1.1rem;
+  margin-top: 10px;
+}
+
+/* Remove link styles in Featured Games */
+.games-grid a {
+  text-decoration: none;
+  color: inherit;
+  display: block; /* Makes the whole area clickable without affecting layout */
+}
+
+/* About Section */
+.about {
+  padding: 40px 20px;
+  text-align: center;
+  background-color: #001f3f;
+}
+
+.about h2 {
+  font-size: 2rem;
+  margin-bottom: 20px;
+}
+
+.about p {
+  font-size: 1.1rem;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+/* Footer */
+footer {
+  text-align: center;
+  padding: 20px;
+  background-color: #0052D4;
+  color: #FFFFFF;
+  font-size: 0.9rem;
+}
+
+/* About Content Section */
+.about-content {
+  padding: 60px 20px;
+  max-width: 900px;
+  margin: 0 auto;
+  text-align: left;
+}
+
+.about-content h2 {
+  font-size: 1.8rem;
+  margin-top: 30px;
+  margin-bottom: 15px;
+  color: #00B4DB;
+}
+
+.about-content p {
+  font-size: 1.1rem;
+  margin-bottom: 20px;
+}

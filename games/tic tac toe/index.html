@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tic Tac Toe - Arcadium</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+  <!-- Arcadium Header -->
+  <header class="game-header">
+    <div class="brand">
+      <img src="assets/images/arcadium-logo.svg.svg" alt="Arcadium Logo" />
+      <span>Tic Tac Toe</span>
+    </div>
+    <button class="menu-btn" id="menu-btn">&#9776;</button>
+    <nav class="menu-dropdown" id="menu-dropdown">
+      <button onclick="goHome()">🏠 Home</button>
+      <button onclick="goBack()">← Back to Games</button>
+      <button onclick="resetGame()">⟳ Reset Game</button>
+      <button onclick="showModeSelection()">🎮 Change Game Mode</button>
+    </nav>
+
+  </header>
+
+  <!-- Message Overlay -->
+  <div class="msg-container hide" id="msg-container">
+    <p id="msg">Winner</p>
+    <button id="new-btn">New Game</button>
+  </div>
+  <!-- Mode Selection Overlay -->
+  <div class="mode-selection" id="modeSelection" style="display:flex;">
+    <h2>Select Game Mode</h2>
+    <button onclick="startVsComputer()">Against Computer</button>
+    <button onclick="startMultiplayer()">Multiplayer</button>
+  </div>
+
+  <!-- Game Container -->
+  <main class="game-container">
+    <div class="game">
+      <button class="box"></button>
+      <button class="box"></button>
+      <button class="box"></button>
+      <button class="box"></button>
+      <button class="box"></button>
+      <button class="box"></button>
+      <button class="box"></button>
+      <button class="box"></button>
+      <button class="box"></button>
+    </div>
+  </main>
+  <script src="/js/stats.js"></script>
+  <script src="app.js"></script>
+  <script>
+    // Menu toggle
+    document.getElementById("menu-btn").addEventListener("click", () => {
+      document.getElementById("menu-dropdown").classList.toggle("show");
+    });
+
+    function goHome() {
+      window.location.href = "/index.html";
+    }
+
+    function goBack() {
+      window.location.href = "../../games.html";
+    }
+
+    function resetGame() {
+      resetGameLogic();
+    }
+
+    // Close menu when clicking outside
+    window.addEventListener("click", function (e) {
+      if (!document.getElementById("menu-btn").contains(e.target) &&
+        !document.getElementById("menu-dropdown").contains(e.target)) {
+        document.getElementById("menu-dropdown").classList.remove("show");
+      }
+    });
+  </script>
+</body>
+
+</html>

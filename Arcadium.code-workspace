@@ -1,0 +1,11 @@
+{
+	"folders": [
+		{
+			"path": "games/tic tac toe"
+		},
+		{
+			"path": "games/rock paper scissors"
+		}
+	],
+	"settings": {}
+}
