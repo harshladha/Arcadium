@@ -1,11 +1,5 @@
 const Stats = {
   getStats(game) {
-    const saved = localStorage.getItem(`arcadium_stats_${game}`);
-    if (saved) {
-      return JSON.parse(saved);
-    }
-
-    // Default stats structure
     const defaultStats = {
       vsComputerWins: 0,
       vsComputerLosses: 0,
@@ -17,6 +11,12 @@ const Stats = {
       multiplayerDraws: 0,
       gamesPlayed: 0,
     };
+
+    const saved = localStorage.getItem(`arcadium_stats_${game}`);
+    if (saved) {
+      const parsed = JSON.parse(saved);
+      return { ...defaultStats, ...parsed }; // 👈 Merge with defaults
+    }
 
     return defaultStats;
   },
@@ -37,11 +37,9 @@ const Stats = {
       if (result === "draw") {
         stats.multiplayerDraws++;
       } else if (game === "tictactoe") {
-        // Count separate wins for X and O
         if (winner === "X") stats.multiplayerXWins++;
         else if (winner === "O") stats.multiplayerOWins++;
       } else {
-        // Generic multiplayer win counter
         stats.multiplayerWins++;
       }
     }
