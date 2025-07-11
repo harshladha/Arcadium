@@ -2,12 +2,14 @@ let gameMode = ""; // "computer" or "multiplayer"
 
 const boxes = document.querySelectorAll(".box");
 const newGameBtn = document.querySelector("#new-btn");
-const resetBtn = document.querySelector("#reset-btn");
+// Removed resetBtn since it does not exist in HTML
 const msgContainer = document.querySelector(".msg-container");
 const msg = document.querySelector("#msg");
 
 let turnO = true;
 let count = 0;
+
+disableBoxes(); // Disable boxes initially until mode is selected
 
 const winPatterns = [
   [0, 1, 2],
@@ -24,12 +26,14 @@ function startVsComputer() {
   gameMode = "computer";
   document.getElementById("modeSelection").style.display = "none";
   resetGameLogic();
+  enableBoxes(); // Enable boxes after mode selection
 }
 
 function startMultiplayer() {
   gameMode = "multiplayer";
   document.getElementById("modeSelection").style.display = "none";
   resetGameLogic();
+  enableBoxes(); // Enable boxes after mode selection
 }
 
 function resetGameLogic() {
@@ -180,8 +184,9 @@ function checkWinner() {
 }
 
 newGameBtn.addEventListener("click", resetGameLogic);
-resetBtn?.addEventListener("click", resetGameLogic); // Added optional chaining for safety
+// Removed resetBtn event listener since reset button does not exist in HTML
 
 window.addEventListener("pageshow", () => {
   document.getElementById("modeSelection").style.display = "flex";
+  disableBoxes(); // Disable boxes initially on page show
 });
