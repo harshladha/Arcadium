@@ -86,7 +86,14 @@ body {
   margin-bottom: 30px;
 }
 
-.play-btn {
+.hero-buttons {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.play-btn, .stats-btn {
   background-color: #00B4DB;
   color: #FFFFFF;
   padding: 12px 30px;
@@ -94,11 +101,21 @@ body {
   text-decoration: none;
   font-weight: 600;
   display: inline-block;
-  transition: background-color 0.3s ease, transform 0.2s ease;
+  transition: all 0.3s ease;
+  font-size: 1.1rem;
 }
 
 .play-btn:hover {
   background-color: #009ACD;
+  transform: scale(1.05);
+}
+
+.stats-btn {
+  background-color: #4CAF50;
+}
+
+.stats-btn:hover {
+  background-color: #45a049;
   transform: scale(1.05);
 }
 
@@ -156,6 +173,98 @@ body {
 .game-card h3 {
   font-size: 1.1rem;
   margin-top: 10px;
+}
+
+/* Snake and Ladder Card Styling */
+.snake-ladder-card {
+  background: linear-gradient(135deg, #003566, #001D3D);
+  border: 2px solid #00B4DB;
+}
+
+.snake-ladder-card .game-icon {
+  font-size: 4rem;
+  height: 150px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: gameIconFloat 3s ease-in-out infinite;
+}
+
+.snake-ladder-card:hover {
+  border-color: #4CAF50;
+  box-shadow: 0 8px 20px rgba(0, 180, 219, 0.3);
+}
+
+@keyframes gameIconFloat {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+}
+
+/* Features Section */
+.features {
+  padding: 60px 20px;
+  text-align: center;
+  background-color: #001f3f;
+}
+
+.features h2 {
+  font-size: 2rem;
+  margin-bottom: 40px;
+  color: #00B4DB;
+}
+
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 30px;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.feature-card {
+  background: linear-gradient(135deg, #003566, #001D3D);
+  border-radius: 15px;
+  padding: 30px 20px;
+  text-align: center;
+  border: 2px solid rgba(0, 180, 219, 0.3);
+  transition: all 0.3s ease;
+}
+
+.feature-card:hover {
+  transform: translateY(-5px);
+  border-color: #00B4DB;
+  box-shadow: 0 8px 20px rgba(0, 180, 219, 0.2);
+}
+
+.feature-icon {
+  font-size: 3rem;
+  margin-bottom: 15px;
+  animation: featureFloat 4s ease-in-out infinite;
+}
+
+.feature-card h3 {
+  font-size: 1.3rem;
+  margin-bottom: 10px;
+  color: #00B4DB;
+}
+
+.feature-card p {
+  font-size: 1rem;
+  opacity: 0.9;
+  line-height: 1.5;
+}
+
+@keyframes featureFloat {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(-8px) rotate(2deg); }
+}
+
+/* Enhanced Game Cards */
+.game-card p {
+  font-size: 0.9rem;
+  opacity: 0.8;
+  margin-top: 8px;
+  line-height: 1.4;
 }
 
 /* Remove link styles in Featured Games */
