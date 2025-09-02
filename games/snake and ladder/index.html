@@ -7,12 +7,39 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <header>
-        <a href="../../games.html" class="back-btn">← Games</a>
-        <h1>SNAKE AND LADDER</h1>
+    <header class="game-header">
+        <div class="brand">
+            <img src="../../assets/images/arcadium-logo.svg.svg" alt="Arcadium Logo">
+            <span>Snake and Ladder</span>
+        </div>
+        <button class="menu-btn" id="menuBtn">☰</button>
+        <div class="menu-dropdown" id="menuDropdown">
+            <button onclick="goHome()">🏠 Home</button>
+            <button onclick="goToGames()">🎮 Games</button>
+            <button onclick="restartGame()">🔄 Restart</button>
+        </div>
     </header>
     
-    <main>
+    <!-- Mode Selection Screen -->
+    <div class="mode-selection" id="modeSelection">
+        <div class="mode-container">
+            <h2>Choose Game Mode</h2>
+            <div class="mode-buttons">
+                <button class="mode-btn" onclick="startGame('human')">
+                    <div class="mode-icon">👥</div>
+                    <h3>vs Human</h3>
+                    <p>Play against another player</p>
+                </button>
+                <button class="mode-btn" onclick="startGame('computer')">
+                    <div class="mode-icon">🤖</div>
+                    <h3>vs Computer</h3>
+                    <p>Play against AI opponent</p>
+                </button>
+            </div>
+        </div>
+    </div>
+    
+    <main class="game-main" id="gameMain" style="display: none;">
         <div class="game-container">
             <div class="game-info">
                 <div class="player-info">

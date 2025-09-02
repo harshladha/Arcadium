@@ -1,11 +1,61 @@
+// Navigation functions
+function goHome() {
+    window.location.href = "../../index.html";
+}
+
+function goToGames() {
+    window.location.href = "../../games.html";
+}
+
+function restartGame() {
+    location.reload();
+}
+
+// Game mode selection
+function startGame(mode) {
+    document.getElementById('modeSelection').style.display = 'none';
+    document.getElementById('gameMain').style.display = 'block';
+    
+    // Track game start
+    if (typeof Stats !== 'undefined') {
+        Stats.trackSnakeAndLadder('gameStart', { mode: mode });
+    }
+    
+    // Initialize game with selected mode
+    window.gameInstance = new SnakeAndLadderGame(mode);
+}
+
+// Menu toggle functionality
+document.addEventListener('DOMContentLoaded', () => {
+    const menuBtn = document.getElementById('menuBtn');
+    const menuDropdown = document.getElementById('menuDropdown');
+    
+    menuBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        menuDropdown.classList.toggle('show');
+    });
+    
+    // Close menu when clicking outside
+    document.addEventListener('click', () => {
+        menuDropdown.classList.remove('show');
+    });
+    
+    // Prevent menu from closing when clicking inside dropdown
+    menuDropdown.addEventListener('click', (e) => {
+        e.stopPropagation();
+    });
+});
+
 class SnakeAndLadderGame {
-    constructor() {
+    constructor(gameMode = 'human') {
+        this.gameMode = gameMode; // 'human' or 'computer'
         this.currentPlayer = 1;
         this.playerPositions = { 1: 1, 2: 1 };
         this.gameBoard = document.getElementById('gameBoard');
         this.rollBtn = document.getElementById('rollBtn');
         this.dice = document.getElementById('dice');
         this.gameMessage = document.getElementById('gameMessage');
+        this.isComputerTurn = false;
         
         // Snake and ladder positions
         this.snakes = {
@@ -113,6 +163,9 @@ class SnakeAndLadderGame {
             this.playerPositions[this.currentPlayer] = snakeEnd;
             message += ` 🐍 Snake bite! Slid down to ${snakeEnd}`;
             
+            // Add visual feedback for snake bite
+            this.showSpecialEffect('snake');
+            
             // Track snake bite
             if (typeof Stats !== 'undefined') {
                 Stats.trackSnakeAndLadder('snakeBite');
@@ -125,6 +178,9 @@ class SnakeAndLadderGame {
             this.playerPositions[this.currentPlayer] = ladderEnd;
             message += ` 🪜 Ladder climb! Climbed up to ${ladderEnd}`;
             
+            // Add visual feedback for ladder climb
+            this.showSpecialEffect('ladder');
+            
             // Track ladder climb
             if (typeof Stats !== 'undefined') {
                 Stats.trackSnakeAndLadder('ladderClimb');
@@ -134,12 +190,22 @@ class SnakeAndLadderGame {
         
         // Check for win
         if (this.playerPositions[this.currentPlayer] >= 100) {
-            this.gameMessage.textContent = `🎉 Player ${this.currentPlayer} wins! 🎉`;
+            let winMessage;
+            if (this.gameMode === 'computer') {
+                winMessage = this.currentPlayer === 1 ? '🎉 You win! 🎉' : '🤖 Computer wins! 🤖';
+            } else {
+                winMessage = `🎉 Player ${this.currentPlayer} wins! 🎉`;
+            }
+            this.gameMessage.textContent = winMessage;
             this.rollBtn.disabled = true;
             
             // Track game completion
             if (typeof Stats !== 'undefined') {
-                Stats.trackSnakeAndLadder('gameEnd', { winner: this.currentPlayer });
+                Stats.trackSnakeAndLadder('gameEnd', { 
+                    winner: this.currentPlayer,
+                    gameMode: this.gameMode,
+                    playerWon: this.gameMode === 'computer' ? this.currentPlayer === 1 : null
+                });
             }
             return;
         }
@@ -151,6 +217,21 @@ class SnakeAndLadderGame {
     switchPlayer() {
         this.currentPlayer = this.currentPlayer === 1 ? 2 : 1;
         this.updateDisplay();
+        
+        // If it's computer's turn in computer mode, auto-roll after a delay
+        if (this.gameMode === 'computer' && this.currentPlayer === 2) {
+            this.isComputerTurn = true;
+            this.rollBtn.disabled = true;
+            this.gameMessage.textContent = "Computer is thinking...";
+            
+            setTimeout(() => {
+                if (this.currentPlayer === 2) { // Double check it's still computer's turn
+                    this.rollDice();
+                }
+            }, 1500 + Math.random() * 1000); // Random delay between 1.5-2.5 seconds
+        } else {
+            this.isComputerTurn = false;
+        }
     }
     
     updateDisplay() {
@@ -158,13 +239,36 @@ class SnakeAndLadderGame {
         document.getElementById('player1').classList.toggle('active', this.currentPlayer === 1);
         document.getElementById('player2').classList.toggle('active', this.currentPlayer === 2);
         
+        // Update player names based on game mode
+        const player1Name = document.querySelector('#player1 .player-name');
+        const player2Name = document.querySelector('#player2 .player-name');
+        
+        if (this.gameMode === 'computer') {
+            player1Name.textContent = 'You';
+            player2Name.textContent = 'Computer';
+        } else {
+            player1Name.textContent = 'Player 1';
+            player2Name.textContent = 'Player 2';
+        }
+        
         // Update positions
         document.querySelector('#player1 .player-position').textContent = `Position: ${this.playerPositions[1]}`;
         document.querySelector('#player2 .player-position').textContent = `Position: ${this.playerPositions[2]}`;
         
         // Update game message
-        if (!this.gameMessage.textContent.includes('wins')) {
-            this.gameMessage.textContent = `Player ${this.currentPlayer}'s turn - Roll the dice!`;
+        if (!this.gameMessage.textContent.includes('wins') && !this.isComputerTurn) {
+            if (this.gameMode === 'computer') {
+                this.gameMessage.textContent = this.currentPlayer === 1 ? "Your turn - Roll the dice!" : "Computer's turn";
+            } else {
+                this.gameMessage.textContent = `Player ${this.currentPlayer}'s turn - Roll the dice!`;
+            }
+        }
+        
+        // Disable roll button for computer turns
+        if (this.gameMode === 'computer' && this.currentPlayer === 2) {
+            this.rollBtn.disabled = true;
+        } else if (!this.isComputerTurn) {
+            this.rollBtn.disabled = false;
         }
     }
     
@@ -195,9 +299,26 @@ class SnakeAndLadderGame {
             }
         });
     }
+    
+    showSpecialEffect(type) {
+        // Create a temporary visual effect
+        const effect = document.createElement('div');
+        effect.className = `special-effect ${type}-effect`;
+        effect.textContent = type === 'snake' ? '🐍💥' : '🪜✨';
+        
+        document.body.appendChild(effect);
+        
+        // Remove effect after animation
+        setTimeout(() => {
+            if (effect.parentNode) {
+                effect.parentNode.removeChild(effect);
+            }
+        }, 2000);
+    }
 }
 
 // Initialize game when page loads
 document.addEventListener('DOMContentLoaded', () => {
-    new SnakeAndLadderGame();
+    // Don't auto-initialize game, wait for mode selection
+    // The game will be initialized when startGame() is called
 });

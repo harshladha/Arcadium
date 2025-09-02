@@ -60,8 +60,19 @@ const Stats = {
     switch(action) {
       case 'gameEnd':
         stats.gamesPlayed++;
-        if (data.winner === 1) stats.player1Wins++;
-        else if (data.winner === 2) stats.player2Wins++;
+        
+        // Handle different game modes
+        if (data.gameMode === 'computer') {
+          if (data.playerWon === true) {
+            stats.vsComputerWins++;
+          } else if (data.playerWon === false) {
+            stats.vsComputerLosses++;
+          }
+        } else {
+          // Human vs Human mode
+          if (data.winner === 1) stats.player1Wins++;
+          else if (data.winner === 2) stats.player2Wins++;
+        }
         break;
       case 'diceRoll':
         stats.totalRolls++;

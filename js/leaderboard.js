@@ -27,9 +27,11 @@ const GameConfigs = {
   snakeandladder: {
     title: "Snake and Ladder",
     fields: [
-      { key: "gamesPlayed", label: "Games Played" },
-      { key: "player1Wins", label: "Player 1 Wins" },
-      { key: "player2Wins", label: "Player 2 Wins" },
+      { key: "gamesPlayed", label: "Total Games Played" },
+      { key: "vsComputerWins", label: "Wins vs Computer" },
+      { key: "vsComputerLosses", label: "Losses vs Computer" },
+      { key: "player1Wins", label: "Player 1 Wins (vs Human)" },
+      { key: "player2Wins", label: "Player 2 Wins (vs Human)" },
       { key: "totalRolls", label: "Total Dice Rolls" },
       { key: "snakeBites", label: "Snake Bites" },
       { key: "ladderClimbs", label: "Ladder Climbs" }
