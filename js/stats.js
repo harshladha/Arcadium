@@ -10,14 +10,11 @@ const Stats = {
       multiplayerLosses: 0,
       multiplayerDraws: 0,
       gamesPlayed: 0,
-<<<<<<< HEAD
       player1Wins: 0,
       player2Wins: 0,
       totalRolls: 0,
       snakeBites: 0,
       ladderClimbs: 0,
-=======
->>>>>>> a2cace853e4f52672e969bf32d15e3837dc0f4e9
     };
 
     const saved = localStorage.getItem(`arcadium_stats_${game}`);
@@ -54,7 +51,6 @@ const Stats = {
 
     stats.gamesPlayed++;
     this.saveStats(game, stats);
-<<<<<<< HEAD
   },
 
   // Snake and Ladder specific tracking
@@ -79,7 +75,5 @@ const Stats = {
     }
     
     this.saveStats('snakeandladder', stats);
-=======
->>>>>>> a2cace853e4f52672e969bf32d15e3837dc0f4e9
   }
 };

@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 arcadium/
 ├── index.html             # Main landing page
 ├── games.html             # Games dashboard (list of games)
@@ -38,17 +37,6 @@ arcadium/
 ├── /docs                  # Documentation (README, planning)
 │   └── README.md
 └── /dist                  # Production build (optional)
-=======
-arcadium/
-├── index.html             # Main landing page
-├── games.html             # Games dashboard (list of games)
-├── login.html             # Login page (if using static hosting)
-├── profile.html           # User profile / leaderboard
-├── /css
-│   ├── main.css           # Global styles
-│   └── games.css          # Styles specific to game screens
-├── /js
-│   ├── app.js             # General app logic (navigation, auth)
 │   ├── leaderboard.js     # Leaderboard logic
 │   ├── auth.js            # Login/signup logic
 │   └── router.js          # (Optional) SPA routing
@@ -78,4 +66,3 @@ arcadium/
 ├── /docs                  # Documentation (README, planning)
 │   └── README.md
 └── /dist                  # Production build (optional)
->>>>>>> 3fdfa406fdef56ab60ab4007b2ae026cb92dcd78

@@ -24,7 +24,6 @@ const GameConfigs = {
       { key: "vsComputerDraws", label: "Draws" }
     ]
   },
-<<<<<<< HEAD
   snakeandladder: {
     title: "Snake and Ladder",
     fields: [
@@ -34,12 +33,6 @@ const GameConfigs = {
       { key: "totalRolls", label: "Total Dice Rolls" },
       { key: "snakeBites", label: "Snake Bites" },
       { key: "ladderClimbs", label: "Ladder Climbs" }
-=======
-  snake: {
-    title: "Snake",
-    fields: [
-      { key: "gamesPlayed", label: "Games Played" }
->>>>>>> a2cace853e4f52672e969bf32d15e3837dc0f4e9
     ]
   }
 };
@@ -73,7 +66,6 @@ document.querySelectorAll(".leaderboard-tile").forEach(tile => {
 closeModal.addEventListener("click", () => {
   leaderboardModal.classList.add("hide");
 });
-<<<<<<< HEAD
 
 // Close modal when clicking outside
 leaderboardModal.addEventListener("click", (e) => {
@@ -81,5 +73,3 @@ leaderboardModal.addEventListener("click", (e) => {
     leaderboardModal.classList.add("hide");
   }
 });
-=======
->>>>>>> a2cace853e4f52672e969bf32d15e3837dc0f4e9
