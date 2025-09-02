@@ -1,0 +1,256 @@
+<<<<<<< HEAD
+/* Reset default styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Body styling */
+body {
+  font-family: 'Poppins', sans-serif;
+  background: #0A0A23; /* dark blue background */
+  color: #FFFFFF;
+  padding: 20px;
+}
+
+/* Header styling */
+/* Make header a flex container to position items */
+/* Header container */
+header {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center; /* Center the title horizontally */
+  padding: 20px;
+  background: linear-gradient(90deg, #0052D4, #4364F7, #6FB1FC);
+  border-radius: 12px;
+  margin-bottom: 30px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+}
+
+/* Header title centered */
+header h1 {
+  font-size: 2rem;
+  letter-spacing: 2px;
+  color: #FFFFFF;
+}
+
+/* Back button on the left side */
+.back-btn {
+  position: absolute;
+  left: 20px; /* Distance from the left edge */
+  background-color: rgba(255, 255, 255, 0.1);
+  color: #FFFFFF;
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-weight: 500;
+  text-decoration: none;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+/* Hover effect for the back button */
+.back-btn:hover {
+  background-color: rgba(255, 255, 255, 0.3);
+  transform: translateY(-2px);
+}
+
+/* Main area */
+main {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+/* Game card styling */
+.games {
+  width: 180px;
+  height: 180px;
+  background-color: #003566;
+  border-radius: 15px;
+  border: 2px solid #00B4DB;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  text-align: center;
+  padding: 10px;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.3s ease;
+}
+
+.games:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 16px rgba(0,0,0,0.5);
+}
+
+/* Game icon containers */
+.games div {
+  width: 100%;
+  height: 120px;
+  border-radius: 10px;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  margin-bottom: 10px;
+}
+
+/* Game labels */
+.games {
+  font-weight: 600;
+  font-size: 1rem;
+}
+
+/* Tic Tac Toe image */
+#tic-tac-toe {
+  background-image: url('../assets/images/tic-tac-toe.png');
+}
+
+/* Rock Paper Scissors image */
+#rock-paper-scissors {
+  background-image: url('../assets/images/rock-paper-scissors.png');
+}
+
+<<<<<<< HEAD
+/* Snake and Ladder image */
+#snake-and-ladder {
+  background: linear-gradient(135deg, #4CAF50, #FF6B6B);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+}
+
+#snake-and-ladder::before {
+  content: "🐍🪜";
+=======
+/* Link styling reset */
+a {
+  text-decoration: none;
+  color: inherit;
+}
+=======
+/* Reset default styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Body styling */
+body {
+  font-family: 'Poppins', sans-serif;
+  background: #0A0A23; /* dark blue background */
+  color: #FFFFFF;
+  padding: 20px;
+}
+
+/* Header styling */
+/* Make header a flex container to position items */
+/* Header container */
+header {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center; /* Center the title horizontally */
+  padding: 20px;
+  background: linear-gradient(90deg, #0052D4, #4364F7, #6FB1FC);
+  border-radius: 12px;
+  margin-bottom: 30px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+}
+
+/* Header title centered */
+header h1 {
+  font-size: 2rem;
+  letter-spacing: 2px;
+  color: #FFFFFF;
+}
+
+/* Back button on the left side */
+.back-btn {
+  position: absolute;
+  left: 20px; /* Distance from the left edge */
+  background-color: rgba(255, 255, 255, 0.1);
+  color: #FFFFFF;
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-weight: 500;
+  text-decoration: none;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+/* Hover effect for the back button */
+.back-btn:hover {
+  background-color: rgba(255, 255, 255, 0.3);
+  transform: translateY(-2px);
+}
+
+/* Main area */
+main {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+/* Game card styling */
+.games {
+  width: 180px;
+  height: 180px;
+  background-color: #003566;
+  border-radius: 15px;
+  border: 2px solid #00B4DB;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  text-align: center;
+  padding: 10px;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.3s ease;
+}
+
+.games:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 16px rgba(0,0,0,0.5);
+}
+
+/* Game icon containers */
+.games div {
+  width: 100%;
+  height: 120px;
+  border-radius: 10px;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  margin-bottom: 10px;
+}
+
+/* Game labels */
+.games {
+  font-weight: 600;
+  font-size: 1rem;
+}
+
+/* Tic Tac Toe image */
+#tic-tac-toe {
+  background-image: url('../assets/images/tic-tac-toe.png');
+}
+
+/* Rock Paper Scissors image */
+#rock-paper-scissors {
+  background-image: url('../assets/images/rock-paper-scissors.png');
+>>>>>>> a2cace853e4f52672e969bf32d15e3837dc0f4e9
+}
+
+/* Link styling reset */
+a {
+  text-decoration: none;
+  color: inherit;
+}
+<<<<<<< HEAD
+=======
+>>>>>>> 3fdfa406fdef56ab60ab4007b2ae026cb92dcd78
+>>>>>>> a2cace853e4f52672e969bf32d15e3837dc0f4e9

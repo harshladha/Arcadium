@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Leaderboard</title>
+  <link rel="stylesheet" href="css/leaderboard.css"/>
+</head>
+<body>
+  <!-- Header -->
+  <header class="header">
+    <div class="logo-circle">
+      <img src="assets/images/arcadium-logo.svg.svg" alt="Arcadium Logo" id="logo"/>
+    </div>
+    <nav>
+      <a href="index.html"><button class="header-btn">Home</button></a>
+      <a href="games.html"><button class="header-btn">Games</button></a>
+      <a href="leaderboard.html"><button class="header-btn">Leaderboard</button></a>
+      <a href="about.html"><button class="header-btn">About</button></a>
+    </nav>
+  </header>
+
+  <!-- Leaderboards Grid -->
+  <main class="leaderboard-container">
+    <h1>Game Leaderboards</h1>
+    <div class="leaderboard-grid">
+      <!-- Tic Tac Toe -->
+      <div class="leaderboard-tile" data-game="tictactoe">
+        <img src="assets/images/tic-tac-toe.png" alt="Tic Tac Toe"/>
+        <span>Tic Tac Toe</span>
+      </div>
+      <!-- Rock Paper Scissors -->
+      <div class="leaderboard-tile" data-game="rockpaperscissors">
+        <img src="assets/images/rock-paper-scissors.png" alt="Rock Paper Scissors"/>
+        <span>Rock Paper Scissors</span>
+      </div>
+<<<<<<< HEAD
+      <!-- Snake and Ladder -->
+      <div class="leaderboard-tile" data-game="snakeandladder">
+        <div class="tile-icon">🐍🪜</div>
+        <span>Snake and Ladder</span>
+=======
+      <!-- Snake -->
+      <div class="leaderboard-tile" data-game="snake">
+        <img src="assets/images/snake-icon.svg" alt="Snake"/>
+        <span>Snake</span>
+>>>>>>> a2cace853e4f52672e969bf32d15e3837dc0f4e9
+      </div>
+    </div>
+  </main>
+
+  <!-- Modal Overlay -->
+  <div class="modal-overlay hide" id="leaderboardModal">
+    <div class="modal-content">
+      <h2 id="modalTitle">Game Stats</h2>
+      <dl id="statsList">
+        <!-- Stats will be injected here -->
+      </dl>
+      <button id="closeModal">Close</button>
+    </div>
+  </div>
+
+  <script src="js/stats.js"></script>
+  <script src="js/leaderboard.js"></script>
+  <script>
+    // Navigation
+    function goHome() {
+      window.location.href = "index.html";
+    }
+  </script>
+
+  <!-- Footer -->
+  <footer>
+    &copy; 2025 Arcadium. All rights reserved.
+  </footer>
+</body>
+</html>
