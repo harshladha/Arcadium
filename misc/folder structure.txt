@@ -37,32 +37,3 @@ arcadium/
 ├── /docs                  # Documentation (README, planning)
 │   └── README.md
 └── /dist                  # Production build (optional)
-│   ├── leaderboard.js     # Leaderboard logic
-│   ├── auth.js            # Login/signup logic
-│   └── router.js          # (Optional) SPA routing
-├── /games                 # All mini-games
-│   ├── tic-tac-toe/
-│   │   ├── index.html
-│   │   ├── game.js
-│   │   └── style.css
-│   ├── snake/
-│   │   ├── index.html
-│   │   ├── game.js
-│   │   └── style.css
-│   ├── memory/
-│   │   ├── index.html
-│   │   ├── game.js
-│   │   └── style.css
-│   └── ...more games
-├── /assets
-│   ├── /images
-│   │   ├── logo.png
-│   │   └── game-thumbnails/
-│   └── /sounds
-│       ├── click.wav
-│       └── win.mp3
-├── /data                  # Static JSON data (e.g., badge definitions)
-│   └── badges.json
-├── /docs                  # Documentation (README, planning)
-│   └── README.md
-└── /dist                  # Production build (optional)
