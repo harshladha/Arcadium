@@ -100,17 +100,98 @@ class SnakeAndLadderGame {
                 // Mark snakes and ladders
                 if (this.snakes[squareNumber]) {
                     square.classList.add('snake');
-                    square.title = `Snake! Go to ${this.snakes[squareNumber]}`;
+                    square.classList.add('snake-head');
+                    square.title = `Snake Head! Slides down to ${this.snakes[squareNumber]}`;
+                    square.setAttribute('data-destination', this.snakes[squareNumber]);
                 } else if (this.ladders[squareNumber]) {
                     square.classList.add('ladder');
-                    square.title = `Ladder! Go to ${this.ladders[squareNumber]}`;
+                    square.classList.add('ladder-bottom');
+                    square.title = `Ladder Bottom! Climbs up to ${this.ladders[squareNumber]}`;
+                    square.setAttribute('data-destination', this.ladders[squareNumber]);
                 }
+                
+                // Mark snake tails and ladder tops
+                Object.values(this.snakes).forEach(tailPos => {
+                    if (tailPos === squareNumber) {
+                        square.classList.add('snake-tail');
+                        square.title = `Snake Tail - Safe square`;
+                    }
+                });
+                
+                Object.values(this.ladders).forEach(topPos => {
+                    if (topPos === squareNumber) {
+                        square.classList.add('ladder-top');
+                        square.title = `Ladder Top - Safe square`;
+                    }
+                });
                 
                 this.gameBoard.appendChild(square);
             }
         }
         
         this.updatePlayerPositions();
+        this.drawConnections();
+    }
+    
+    drawConnections() {
+        // Remove existing connections
+        document.querySelectorAll('.connection-line').forEach(line => line.remove());
+        
+        // Draw snake connections
+        Object.entries(this.snakes).forEach(([head, tail]) => {
+            this.drawConnection(head, tail, 'snake');
+        });
+        
+        // Draw ladder connections
+        Object.entries(this.ladders).forEach(([bottom, top]) => {
+            this.drawConnection(bottom, top, 'ladder');
+        });
+    }
+    
+    drawConnection(from, to, type) {
+        const fromSquare = document.querySelector(`[data-number="${from}"]`);
+        const toSquare = document.querySelector(`[data-number="${to}"]`);
+        
+        if (!fromSquare || !toSquare) return;
+        
+        const fromRect = fromSquare.getBoundingClientRect();
+        const toRect = toSquare.getBoundingClientRect();
+        const boardRect = this.gameBoard.getBoundingClientRect();
+        
+        // Calculate relative positions
+        const fromX = fromRect.left - boardRect.left + fromRect.width / 2;
+        const fromY = fromRect.top - boardRect.top + fromRect.height / 2;
+        const toX = toRect.left - boardRect.left + toRect.width / 2;
+        const toY = toRect.top - boardRect.top + toRect.height / 2;
+        
+        // Create connection line
+        const line = document.createElement('div');
+        line.className = `connection-line ${type}-connection`;
+        
+        const length = Math.sqrt(Math.pow(toX - fromX, 2) + Math.pow(toY - fromY, 2));
+        const angle = Math.atan2(toY - fromY, toX - fromX) * 180 / Math.PI;
+        
+        line.style.position = 'absolute';
+        line.style.left = fromX + 'px';
+        line.style.top = fromY + 'px';
+        line.style.width = length + 'px';
+        line.style.height = '3px';
+        line.style.transformOrigin = '0 50%';
+        line.style.transform = `rotate(${angle}deg)`;
+        line.style.zIndex = '5';
+        line.style.pointerEvents = 'none';
+        
+        if (type === 'snake') {
+            line.style.background = 'linear-gradient(90deg, #FF6B6B, #FF8E53, #FF6B6B)';
+            line.style.borderRadius = '2px';
+            line.style.boxShadow = '0 0 4px rgba(255, 107, 107, 0.6)';
+        } else {
+            line.style.background = 'linear-gradient(90deg, #4CAF50, #45a049, #4CAF50)';
+            line.style.borderRadius = '2px';
+            line.style.boxShadow = '0 0 4px rgba(76, 175, 80, 0.6)';
+        }
+        
+        this.gameBoard.appendChild(line);
     }
     
     rollDice() {
@@ -321,4 +402,13 @@ class SnakeAndLadderGame {
 document.addEventListener('DOMContentLoaded', () => {
     // Don't auto-initialize game, wait for mode selection
     // The game will be initialized when startGame() is called
+    
+    // Redraw connections on window resize
+    window.addEventListener('resize', () => {
+        if (window.gameInstance) {
+            setTimeout(() => {
+                window.gameInstance.drawConnections();
+            }, 100);
+        }
+    });
 });
