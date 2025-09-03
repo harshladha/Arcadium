@@ -5,93 +5,24 @@
   box-sizing: border-box;
 }
 
-/* Body (to avoid inherited text-align:center everywhere) */
+/* Body */
 body {
   text-align: center;
-}
-
-/* Header */
-.game-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background: linear-gradient(90deg, #0052D4, #4364F7, #6FB1FC);
-  padding: 10px 20px;
-  position: relative;
-  flex-wrap: wrap;
-}
-
-/* Brand container */
-.brand {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-/* Logo image - fixed height, auto width, no stretching */
-.brand img {
-  height: 50px;
-  width: auto;
-  object-fit: contain;
-}
-
-/* Game title next to logo */
-.brand span {
-  font-weight: 600;
-  font-size: 1.3rem;
+  font-family: 'Poppins', sans-serif;
+  background: #0A0A23;
   color: #fff;
-  white-space: nowrap;
 }
 
-/* Menu button */
-.menu-btn {
-  background: none;
-  border: none;
-  font-size: 1.8rem;
-  color: #fff;
-  cursor: pointer;
-}
-
-/* Dropdown menu */
-.menu-dropdown {
-  display: none;
-  position: absolute;
-  top: 60px;
-  right: 20px;
-  background-color: #001f3f;
-  border-radius: 8px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.4);
-  overflow: hidden;
-}
-
-.menu-dropdown.show {
-  display: block;
-}
-
-.menu-dropdown button {
-  width: 100%;
-  background: none;
-  border: none;
-  color: #fff;
-  padding: 10px 15px;
-  text-align: left;
-  cursor: pointer;
-  font-size: 1rem;
-  transition: background 0.3s;
-}
-
-.menu-dropdown button:hover {
-  background-color: rgba(255,255,255,0.1);
-}
-
-/* Rest of your styles stay unchanged */
+/* Game Title */
 h1 {
   background-color: #081b31;
   color: #fff;
   height: 5rem;
   line-height: 5rem;
+  margin-top: 0;
 }
 
+/* Choice Buttons */
 .choice {
   height: 165px;
   width: 165px;
@@ -99,28 +30,33 @@ h1 {
   display: flex;
   justify-content: center;
   align-items: center;
+  transition: all 0.3s ease;
 }
 
 .choice:hover {
   cursor: pointer;
   background-color: #081b31;
+  transform: scale(1.1);
 }
 
-img {
+.choice img {
   height: 150px;
   width: 150px;
   object-fit: cover;
   border-radius: 50%;
 }
 
+/* Choices Container */
 .choices {
   display: flex;
   justify-content: center;
   align-items: center;
   gap: 3rem;
   margin-top: 5rem;
+  flex-wrap: wrap;
 }
 
+/* Score Board */
 .score-board {
   display: flex;
   justify-content: center;
@@ -128,13 +64,21 @@ img {
   font-size: 2rem;
   margin-top: 3rem;
   gap: 5rem;
+  flex-wrap: wrap;
+}
+
+.score {
+  text-align: center;
 }
 
 #user-score,
 #comp-score {
   font-size: 4rem;
+  font-weight: bold;
+  color: #00B4DB;
 }
 
+/* Message Container */
 .msg-container {
   margin-top: 5rem;
 }
@@ -143,7 +87,43 @@ img {
   background-color: #081b31;
   color: #fff;
   font-size: 2rem;
-  display: inline;
-  padding: 1rem;
+  display: inline-block;
+  padding: 1rem 2rem;
   border-radius: 1rem;
+  border: 2px solid #00B4DB;
+  transition: all 0.3s ease;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .choices {
+    gap: 1.5rem;
+    margin-top: 3rem;
+  }
+  
+  .choice {
+    height: 120px;
+    width: 120px;
+  }
+  
+  .choice img {
+    height: 110px;
+    width: 110px;
+  }
+  
+  .score-board {
+    gap: 3rem;
+    font-size: 1.5rem;
+  }
+  
+  #user-score,
+  #comp-score {
+    font-size: 3rem;
+  }
+  
+  h1 {
+    font-size: 1.5rem;
+    height: 4rem;
+    line-height: 4rem;
+  }
 }

@@ -1,0 +1,165 @@
+/* Shared Game Header Styles for Arcadium */
+
+/* Game Header */
+.game-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: linear-gradient(90deg, #0052D4, #4364F7, #6FB1FC);
+  padding: 10px 20px;
+  position: relative;
+  flex-wrap: wrap;
+  min-height: 70px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+
+/* Brand container */
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* Logo image */
+.brand img {
+  height: 50px;
+  width: auto;
+  object-fit: contain;
+}
+
+/* Game title next to logo */
+.brand span {
+  font-weight: 600;
+  font-size: 1.3rem;
+  color: #fff;
+  white-space: nowrap;
+}
+
+/* Menu button (hamburger) */
+.menu-btn {
+  background: none;
+  border: none;
+  font-size: 1.8rem;
+  color: #fff;
+  cursor: pointer;
+  padding: 5px;
+  transition: transform 0.2s ease;
+}
+
+.menu-btn:hover {
+  transform: scale(1.1);
+}
+
+/* Dropdown menu */
+.menu-dropdown {
+  display: none;
+  position: absolute;
+  top: 70px;
+  right: 20px;
+  background-color: #001f3f;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+  overflow: hidden;
+  z-index: 1000;
+  min-width: 180px;
+}
+
+.menu-dropdown.show {
+  display: block;
+  animation: dropdownSlide 0.3s ease-out;
+}
+
+@keyframes dropdownSlide {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Dropdown buttons */
+.menu-dropdown button {
+  width: 100%;
+  background: none;
+  border: none;
+  color: #fff;
+  padding: 12px 20px;
+  text-align: left;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background 0.3s;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.menu-dropdown button:hover {
+  background-color: rgba(255,255,255,0.1);
+}
+
+/* Mode Selection Overlay (for games that have it) */
+.mode-selection {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(10, 10, 35, 0.95);
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 999;
+  color: white;
+  font-family: 'Poppins', sans-serif;
+  gap: 20px;
+}
+
+.mode-selection h2 {
+  font-size: 2.5rem;
+  margin-bottom: 30px;
+  color: #00B4DB;
+}
+
+.mode-selection button {
+  background: linear-gradient(135deg, #003566, #001D3D);
+  border: 2px solid #00B4DB;
+  border-radius: 15px;
+  padding: 20px 40px;
+  color: #FFFFFF;
+  font-size: 1.2rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin: 10px;
+}
+
+.mode-selection button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(0, 180, 219, 0.3);
+  border-color: #4CAF50;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .brand span {
+    font-size: 1.1rem;
+  }
+  
+  .brand img {
+    height: 40px;
+  }
+  
+  .menu-dropdown {
+    right: 10px;
+    min-width: 160px;
+  }
+  
+  .menu-dropdown button {
+    padding: 10px 15px;
+    font-size: 0.9rem;
+  }
+}

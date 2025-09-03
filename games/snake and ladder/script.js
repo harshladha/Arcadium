@@ -11,6 +11,11 @@ function restartGame() {
     location.reload();
 }
 
+function showModeSelection() {
+    document.getElementById('gameMain').style.display = 'none';
+    document.getElementById('modeSelection').style.display = 'flex';
+}
+
 // Game mode selection
 function startGame(mode) {
     document.getElementById('modeSelection').style.display = 'none';
