@@ -69,6 +69,29 @@ const GameConfigs = {
       { key: "goldenMoleHits", label: "Golden Mole Hits" },
       { key: "bombHits", label: "Bomb Hits" }
     ]
+  },
+  tetris: {
+    title: "Tetris",
+    fields: [
+      { key: "gamesPlayed", label: "Games Played" },
+      { key: "highScore", label: "High Score" },
+      { key: "totalScore", label: "Total Score" },
+      { key: "totalLines", label: "Total Lines Cleared" },
+      { key: "tetrises", label: "Tetrises (4 Lines)" },
+      { key: "maxLevel", label: "Max Level Reached" }
+    ]
+  },
+  snake: {
+    title: "Snake",
+    fields: [
+      { key: "gamesPlayed", label: "Games Played" },
+      { key: "easyHighScore", label: "Easy High Score" },
+      { key: "mediumHighScore", label: "Medium High Score" },
+      { key: "hardHighScore", label: "Hard High Score" },
+      { key: "totalScore", label: "Total Score" },
+      { key: "totalFood", label: "Total Food Eaten" },
+      { key: "maxLength", label: "Max Snake Length" }
+    ]
   }
 };
 

@@ -33,6 +33,14 @@ const Stats = {
       easyHighScore: 0,
       mediumHighScore: 0,
       hardHighScore: 0,
+      // Tetris stats
+      totalLines: 0,
+      tetrises: 0,
+      highScore: 0,
+      maxLevel: 0,
+      // Snake stats
+      totalFood: 0,
+      maxLength: 0,
     };
 
     const saved = localStorage.getItem(`arcadium_stats_${game}`);
@@ -185,5 +193,60 @@ const Stats = {
     }
     
     this.saveStats('whackamole', stats);
+  },
+
+  // Tetris specific tracking
+  trackTetris(action, data = {}) {
+    const stats = this.getStats('tetris');
+    
+    switch(action) {
+      case 'gameStart':
+        stats.gamesPlayed++;
+        break;
+      case 'linesCleared':
+        stats.totalLines += data.lines;
+        if (data.lines === 4) stats.tetrises++; // Four lines at once
+        break;
+      case 'gameEnd':
+        stats.totalScore += data.score;
+        if (data.score > (stats.highScore || 0)) {
+          stats.highScore = data.score;
+        }
+        if (data.level > (stats.maxLevel || 0)) {
+          stats.maxLevel = data.level;
+        }
+        break;
+    }
+    
+    this.saveStats('tetris', stats);
+  },
+
+  // Snake specific tracking
+  trackSnake(action, data = {}) {
+    const stats = this.getStats('snake');
+    
+    switch(action) {
+      case 'gameStart':
+        stats.gamesPlayed++;
+        break;
+      case 'foodEaten':
+        stats.totalFood++;
+        break;
+      case 'gameEnd':
+        stats.totalScore += data.score;
+        if (data.difficulty === 'easy' && data.score > (stats.easyHighScore || 0)) {
+          stats.easyHighScore = data.score;
+        } else if (data.difficulty === 'medium' && data.score > (stats.mediumHighScore || 0)) {
+          stats.mediumHighScore = data.score;
+        } else if (data.difficulty === 'hard' && data.score > (stats.hardHighScore || 0)) {
+          stats.hardHighScore = data.score;
+        }
+        if (data.length > (stats.maxLength || 0)) {
+          stats.maxLength = data.length;
+        }
+        break;
+    }
+    
+    this.saveStats('snake', stats);
   }
 };
