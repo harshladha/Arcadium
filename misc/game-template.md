@@ -19,7 +19,7 @@ This document outlines the standard structure and navigation pattern that all ga
 ```html
 <header class="game-header">
   <div class="brand">
-    <img src="../../assets/images/arcadium-logo.svg.svg" alt="Arcadium Logo" />
+    <img src="../../assets/images/arcadium-logo.svg" alt="Arcadium Logo" />
     <span>[Game Name]</span>
   </div>
   <button class="menu-btn" id="menu-btn">☰</button>

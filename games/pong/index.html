@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pong - Arcadium</title>
+    <link rel="stylesheet" href="../../css/game-header.css" />
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Arcadium Header -->
+    <header class="game-header">
+        <div class="brand">
+            <img src="../../assets/images/arcadium-logo.svg" alt="Arcadium Logo" />
+            <span>Pong</span>
+        </div>
+        <button class="menu-btn" id="menu-btn">☰</button>
+        <nav class="menu-dropdown" id="menu-dropdown">
+            <button onclick="goHome()">🏠 Home</button>
+            <button onclick="goBack()">🎮 Back to Games</button>
+            <button onclick="resetGame()">🔄 Restart</button>
+            <button onclick="pauseGame()" id="pauseBtn" style="display: none;">⏸️ Pause</button>
+        </nav>
+    </header>
+
+    <!-- Game Mode Selection -->
+    <div class="mode-selection" id="modeSelection">
+        <div class="mode-container">
+            <h2>Choose Game Mode</h2>
+            <div class="mode-buttons">
+                <button class="mode-btn" onclick="startGame('ai')">
+                    <div class="mode-icon">🤖</div>
+                    <h3>vs Computer</h3>
+                    <p>Play against AI with 3 difficulty levels</p>
+                </button>
+                <button class="mode-btn" onclick="startGame('human')">
+                    <div class="mode-icon">👥</div>
+                    <h3>vs Human</h3>
+                    <p>Two-player local multiplayer</p>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Difficulty Selection (AI Mode) -->
+    <div class="difficulty-selection" id="difficultySelection" style="display: none;">
+        <div class="difficulty-container">
+            <h2>Choose AI Difficulty</h2>
+            <div class="difficulty-buttons">
+                <button class="difficulty-btn" onclick="startAIGame('easy')">
+                    <div class="difficulty-icon">🟢</div>
+                    <h3>Easy</h3>
+                    <p>Slow AI, first to 5 points</p>
+                </button>
+                <button class="difficulty-btn" onclick="startAIGame('medium')">
+                    <div class="difficulty-icon">🟡</div>
+                    <h3>Medium</h3>
+                    <p>Normal AI, first to 7 points</p>
+                </button>
+                <button class="difficulty-btn" onclick="startAIGame('hard')">
+                    <div class="difficulty-icon">🔴</div>
+                    <h3>Hard</h3>
+                    <p>Fast AI, first to 10 points</p>
+                </button>
+            </div>
+            <button class="back-btn" onclick="showModeSelection()">← Back to Mode Selection</button>
+        </div>
+    </div>
+
+    <!-- Game Container -->
+    <main class="game-main" id="gameMain" style="display: none;">
+        <div class="game-info">
+            <div class="scoreboard">
+                <div class="player-score">
+                    <span class="player-name" id="player1Name">Player 1</span>
+                    <span class="score" id="player1Score">0</span>
+                </div>
+                <div class="vs-divider">VS</div>
+                <div class="player-score">
+                    <span class="score" id="player2Score">0</span>
+                    <span class="player-name" id="player2Name">Player 2</span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="game-container">
+            <canvas id="gameCanvas" width="800" height="400"></canvas>
+        </div>
+        
+        <div class="controls-info">
+            <div class="control-section">
+                <h4 id="leftControls">Player 1: W/S</h4>
+            </div>
+            <div class="control-section">
+                <h4 id="rightControls">Player 2: ↑/↓</h4>
+            </div>
+        </div>
+        
+        <div class="mobile-controls" id="mobileControls">
+            <div class="player-controls">
+                <h5>Player 1</h5>
+                <button class="control-btn" onmousedown="startMoving('player1', 'up')" onmouseup="stopMoving('player1')" ontouchstart="startMoving('player1', 'up')" ontouchend="stopMoving('player1')">↑</button>
+                <button class="control-btn" onmousedown="startMoving('player1', 'down')" onmouseup="stopMoving('player1')" ontouchstart="startMoving('player1', 'down')" ontouchend="stopMoving('player1')">↓</button>
+            </div>
+            <div class="player-controls">
+                <h5>Player 2</h5>
+                <button class="control-btn" onmousedown="startMoving('player2', 'up')" onmouseup="stopMoving('player2')" ontouchstart="startMoving('player2', 'up')" ontouchend="stopMoving('player2')">↑</button>
+                <button class="control-btn" onmousedown="startMoving('player2', 'down')" onmouseup="stopMoving('player2')" ontouchstart="startMoving('player2', 'down')" ontouchend="stopMoving('player2')">↓</button>
+            </div>
+        </div>
+    </main>
+
+    <!-- Game Over Modal -->
+    <div class="game-over-modal" id="gameOverModal" style="display: none;">
+        <div class="modal-content">
+            <h2 id="winnerText">🏆 Player 1 Wins! 🏆</h2>
+            <div class="final-stats">
+                <p>Final Score: <span id="finalScore1">0</span> - <span id="finalScore2">0</span></p>
+                <p>Game Mode: <span id="finalMode">vs Human</span></p>
+                <p id="newRecord" style="display: none;">🏆 New Personal Best! 🏆</p>
+            </div>
+            <div class="modal-buttons">
+                <button onclick="restartGame()">🎮 Play Again</button>
+                <button onclick="showModeSelection()">🏠 Main Menu</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Pause Modal -->
+    <div class="pause-modal" id="pauseModal" style="display: none;">
+        <div class="modal-content">
+            <h2>⏸️ Game Paused</h2>
+            <div class="modal-buttons">
+                <button onclick="resumeGame()">▶️ Resume</button>
+                <button onclick="showModeSelection()">🏠 Main Menu</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="../../js/stats.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

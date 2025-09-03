@@ -175,10 +175,50 @@ body {
   margin-top: 10px;
 }
 
+/* Tic Tac Toe Card Styling */
+.tic-tac-toe-card {
+  background: linear-gradient(135deg, #FF6B6B, #4ECDC4);
+  border: 2px solid #FF6B6B;
+}
+
+.tic-tac-toe-card .game-icon {
+  font-size: 4rem;
+  height: 150px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: gameIconFloat 3s ease-in-out infinite;
+}
+
+.tic-tac-toe-card:hover {
+  border-color: #4ECDC4;
+  box-shadow: 0 8px 20px rgba(255, 107, 107, 0.3);
+}
+
+/* Rock Paper Scissors Card Styling */
+.rock-paper-scissors-card {
+  background: linear-gradient(135deg, #FFD93D, #FF6B6B);
+  border: 2px solid #FFD93D;
+}
+
+.rock-paper-scissors-card .game-icon {
+  font-size: 3rem;
+  height: 150px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: gameIconFloat 3s ease-in-out infinite;
+}
+
+.rock-paper-scissors-card:hover {
+  border-color: #FF6B6B;
+  box-shadow: 0 8px 20px rgba(255, 217, 61, 0.3);
+}
+
 /* Snake and Ladder Card Styling */
 .snake-ladder-card {
-  background: linear-gradient(135deg, #003566, #001D3D);
-  border: 2px solid #00B4DB;
+  background: linear-gradient(135deg, #4CAF50, #FF6B6B);
+  border: 2px solid #4CAF50;
 }
 
 .snake-ladder-card .game-icon {
@@ -191,8 +231,8 @@ body {
 }
 
 .snake-ladder-card:hover {
-  border-color: #4CAF50;
-  box-shadow: 0 8px 20px rgba(0, 180, 219, 0.3);
+  border-color: #FF6B6B;
+  box-shadow: 0 8px 20px rgba(76, 175, 80, 0.3);
 }
 
 /* Memory Match Card Styling */
@@ -253,6 +293,86 @@ body {
 .whack-mole-card:hover {
   border-color: #FFEB3B;
   box-shadow: 0 8px 20px rgba(205, 220, 57, 0.3);
+}
+
+/* Tetris Card Styling */
+.tetris-card {
+  background: linear-gradient(135deg, #2196F3, #9C27B0);
+  border: 2px solid #2196F3;
+}
+
+.tetris-card .game-icon {
+  font-size: 4rem;
+  height: 150px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: gameIconFloat 3s ease-in-out infinite;
+}
+
+.tetris-card:hover {
+  border-color: #9C27B0;
+  box-shadow: 0 8px 20px rgba(33, 150, 243, 0.3);
+}
+
+/* Snake Game Card Styling */
+.snake-game-card {
+  background: linear-gradient(135deg, #4CAF50, #8BC34A);
+  border: 2px solid #4CAF50;
+}
+
+.snake-game-card .game-icon {
+  font-size: 4rem;
+  height: 150px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: gameIconFloat 3s ease-in-out infinite;
+}
+
+.snake-game-card:hover {
+  border-color: #8BC34A;
+  box-shadow: 0 8px 20px rgba(76, 175, 80, 0.3);
+}
+
+/* Pong Card Styling */
+.pong-card {
+  background: linear-gradient(135deg, #00BCD4, #2196F3);
+  border: 2px solid #00BCD4;
+}
+
+.pong-card .game-icon {
+  font-size: 4rem;
+  height: 150px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: gameIconFloat 3s ease-in-out infinite;
+}
+
+.pong-card:hover {
+  border-color: #2196F3;
+  box-shadow: 0 8px 20px rgba(0, 188, 212, 0.3);
+}
+
+/* Breakout Card Styling */
+.breakout-card {
+  background: linear-gradient(135deg, #FF5722, #FF9800);
+  border: 2px solid #FF5722;
+}
+
+.breakout-card .game-icon {
+  font-size: 4rem;
+  height: 150px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: gameIconFloat 3s ease-in-out infinite;
+}
+
+.breakout-card:hover {
+  border-color: #FF9800;
+  box-shadow: 0 8px 20px rgba(255, 87, 34, 0.3);
 }
 
 @keyframes gameIconFloat {
@@ -379,4 +499,76 @@ footer {
 .about-content p {
   font-size: 1.1rem;
   margin-bottom: 20px;
+}
+/* 
+Responsive Design for Homepage */
+@media (max-width: 768px) {
+  .games-grid {
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+  }
+  
+  .game-card .game-icon {
+    height: 120px;
+    font-size: 3rem;
+  }
+  
+  .rock-paper-scissors-card .game-icon {
+    font-size: 2.5rem;
+  }
+  
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+  
+  .hero p {
+    font-size: 1rem;
+  }
+  
+  .features-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .games-grid {
+    grid-template-columns: 1fr;
+    gap: 15px;
+  }
+  
+  .game-card {
+    padding: 20px 15px;
+  }
+  
+  .game-card .game-icon {
+    height: 100px;
+    font-size: 2.5rem;
+  }
+  
+  .rock-paper-scissors-card .game-icon {
+    font-size: 2rem;
+  }
+  
+  .game-card h3 {
+    font-size: 1.2rem;
+  }
+  
+  .game-card p {
+    font-size: 0.9rem;
+  }
+  
+  .hero h1 {
+    font-size: 2rem;
+  }
+  
+  .hero-buttons {
+    flex-direction: column;
+    gap: 15px;
+  }
+  
+  .play-btn, .stats-btn {
+    width: 100%;
+    max-width: 250px;
+  }
 }

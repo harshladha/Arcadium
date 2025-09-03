@@ -92,6 +92,32 @@ const GameConfigs = {
       { key: "totalFood", label: "Total Food Eaten" },
       { key: "maxLength", label: "Max Snake Length" }
     ]
+  },
+  pong: {
+    title: "Pong",
+    fields: [
+      { key: "gamesPlayed", label: "Games Played" },
+      { key: "aiGames", label: "vs AI Games" },
+      { key: "humanGames", label: "vs Human Games" },
+      { key: "player1Wins", label: "Player 1 Wins" },
+      { key: "player2Wins", label: "Player 2/AI Wins" },
+      { key: "aiEasyWins", label: "AI Easy Wins" },
+      { key: "aiMediumWins", label: "AI Medium Wins" },
+      { key: "aiHardWins", label: "AI Hard Wins" }
+    ]
+  },
+  breakout: {
+    title: "Breakout",
+    fields: [
+      { key: "gamesPlayed", label: "Games Played" },
+      { key: "highScore", label: "High Score" },
+      { key: "easyHighScore", label: "Easy High Score" },
+      { key: "mediumHighScore", label: "Medium High Score" },
+      { key: "hardHighScore", label: "Hard High Score" },
+      { key: "totalBricks", label: "Total Bricks Destroyed" },
+      { key: "levelsCompleted", label: "Levels Completed" },
+      { key: "maxLevel", label: "Max Level Reached" }
+    ]
   }
 };
 

@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Breakout - Arcadium</title>
+    <link rel="stylesheet" href="../../css/game-header.css" />
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Arcadium Header -->
+    <header class="game-header">
+        <div class="brand">
+            <img src="../../assets/images/arcadium-logo.svg" alt="Arcadium Logo" />
+            <span>Breakout</span>
+        </div>
+        <button class="menu-btn" id="menu-btn">☰</button>
+        <nav class="menu-dropdown" id="menu-dropdown">
+            <button onclick="goHome()">🏠 Home</button>
+            <button onclick="goBack()">🎮 Back to Games</button>
+            <button onclick="resetGame()">🔄 Restart</button>
+            <button onclick="pauseGame()" id="pauseBtn" style="display: none;">⏸️ Pause</button>
+        </nav>
+    </header>
+
+    <!-- Difficulty Selection -->
+    <div class="difficulty-selection" id="difficultySelection">
+        <div class="difficulty-container">
+            <h2>Choose Difficulty</h2>
+            <div class="difficulty-buttons">
+                <button class="difficulty-btn" onclick="startGame('easy')">
+                    <div class="difficulty-icon">🟢</div>
+                    <h3>Easy</h3>
+                    <p>Slow ball, large paddle, 3 lives</p>
+                </button>
+                <button class="difficulty-btn" onclick="startGame('medium')">
+                    <div class="difficulty-icon">🟡</div>
+                    <h3>Medium</h3>
+                    <p>Normal speed, normal paddle, 3 lives</p>
+                </button>
+                <button class="difficulty-btn" onclick="startGame('hard')">
+                    <div class="difficulty-icon">🔴</div>
+                    <h3>Hard</h3>
+                    <p>Fast ball, small paddle, 2 lives</p>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Game Container -->
+    <main class="game-main" id="gameMain" style="display: none;">
+        <div class="game-info">
+            <div class="stats">
+                <div class="stat">
+                    <span class="stat-label">Score</span>
+                    <span class="stat-value" id="score">0</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-label">Level</span>
+                    <span class="stat-value" id="level">1</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-label">Lives</span>
+                    <span class="stat-value" id="lives">3</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-label">Bricks</span>
+                    <span class="stat-value" id="bricks">0</span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="game-container">
+            <canvas id="gameCanvas" width="800" height="600"></canvas>
+        </div>
+        
+        <div class="controls-info">
+            <p>Use ← → arrow keys or mouse to move paddle</p>
+            <p>Press Space to launch ball or pause game</p>
+        </div>
+        
+        <div class="mobile-controls" id="mobileControls">
+            <button class="control-btn" onmousedown="startMoving('left')" onmouseup="stopMoving()" ontouchstart="startMoving('left')" ontouchend="stopMoving()">←</button>
+            <button class="control-btn launch-btn" onclick="launchBall()" id="launchBtn">🚀 Launch</button>
+            <button class="control-btn" onmousedown="startMoving('right')" onmouseup="stopMoving()" ontouchstart="startMoving('right')" ontouchend="stopMoving()">→</button>
+        </div>
+    </main>
+
+    <!-- Game Over Modal -->
+    <div class="game-over-modal" id="gameOverModal" style="display: none;">
+        <div class="modal-content">
+            <h2 id="gameOverTitle">🎮 Game Over! 🎮</h2>
+            <div class="final-stats">
+                <p>Final Score: <span id="finalScore">0</span></p>
+                <p>Level Reached: <span id="finalLevel">1</span></p>
+                <p>Bricks Destroyed: <span id="finalBricks">0</span></p>
+                <p>Difficulty: <span id="finalDifficulty">Medium</span></p>
+                <p id="newHighScore" style="display: none;">🏆 New High Score! 🏆</p>
+            </div>
+            <div class="modal-buttons">
+                <button onclick="restartSameDifficulty()">🎮 Play Again</button>
+                <button onclick="showDifficultySelection()">🎯 Change Difficulty</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Level Complete Modal -->
+    <div class="level-complete-modal" id="levelCompleteModal" style="display: none;">
+        <div class="modal-content">
+            <h2>🎉 Level Complete! 🎉</h2>
+            <div class="level-stats">
+                <p>Level <span id="completedLevel">1</span> Cleared!</p>
+                <p>Bonus Points: <span id="bonusPoints">0</span></p>
+                <p>Lives Remaining: <span id="remainingLives">3</span></p>
+            </div>
+            <div class="modal-buttons">
+                <button onclick="nextLevel()">➡️ Next Level</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Pause Modal -->
+    <div class="pause-modal" id="pauseModal" style="display: none;">
+        <div class="modal-content">
+            <h2>⏸️ Game Paused</h2>
+            <div class="modal-buttons">
+                <button onclick="resumeGame()">▶️ Resume</button>
+                <button onclick="showDifficultySelection()">🏠 Main Menu</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="../../js/stats.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

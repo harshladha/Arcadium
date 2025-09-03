@@ -41,6 +41,19 @@ const Stats = {
       // Snake stats
       totalFood: 0,
       maxLength: 0,
+      // Pong stats
+      aiGames: 0,
+      humanGames: 0,
+      player1Wins: 0,
+      player2Wins: 0,
+      aiEasyWins: 0,
+      aiMediumWins: 0,
+      aiHardWins: 0,
+      // Breakout stats
+      totalBricks: 0,
+      livesLost: 0,
+      levelsCompleted: 0,
+      maxLevel: 0,
     };
 
     const saved = localStorage.getItem(`arcadium_stats_${game}`);
@@ -248,5 +261,69 @@ const Stats = {
     }
     
     this.saveStats('snake', stats);
+  },
+
+  // Pong specific tracking
+  trackPong(action, data = {}) {
+    const stats = this.getStats('pong');
+    
+    switch(action) {
+      case 'gameStart':
+        stats.gamesPlayed++;
+        if (data.mode === 'ai') stats.aiGames++;
+        else stats.humanGames++;
+        break;
+      case 'score':
+        if (data.player === 1) stats.player1Wins++;
+        else stats.player2Wins++;
+        break;
+      case 'gameEnd':
+        if (data.mode === 'ai' && data.winner === 1) {
+          if (data.difficulty === 'easy') stats.aiEasyWins++;
+          else if (data.difficulty === 'medium') stats.aiMediumWins++;
+          else if (data.difficulty === 'hard') stats.aiHardWins++;
+        }
+        break;
+    }
+    
+    this.saveStats('pong', stats);
+  },
+
+  // Breakout specific tracking
+  trackBreakout(action, data = {}) {
+    const stats = this.getStats('breakout');
+    
+    switch(action) {
+      case 'gameStart':
+        stats.gamesPlayed++;
+        break;
+      case 'brickDestroyed':
+        stats.totalBricks++;
+        stats.totalScore += data.points;
+        break;
+      case 'lifeLost':
+        stats.livesLost++;
+        break;
+      case 'levelComplete':
+        stats.levelsCompleted++;
+        if (data.level > (stats.maxLevel || 0)) {
+          stats.maxLevel = data.level;
+        }
+        break;
+      case 'gameEnd':
+        if (data.score > (stats.highScore || 0)) {
+          stats.highScore = data.score;
+        }
+        if (data.difficulty === 'easy' && data.score > (stats.easyHighScore || 0)) {
+          stats.easyHighScore = data.score;
+        } else if (data.difficulty === 'medium' && data.score > (stats.mediumHighScore || 0)) {
+          stats.mediumHighScore = data.score;
+        } else if (data.difficulty === 'hard' && data.score > (stats.hardHighScore || 0)) {
+          stats.hardHighScore = data.score;
+        }
+        break;
+    }
+    
+    this.saveStats('breakout', stats);
   }
 };
