@@ -49,7 +49,7 @@ function showModeSelection() {
 // Make functions globally accessible
 window.startVsComputer = startVsComputer;
 window.startMultiplayer = startMultiplayer;
-window.showModeSelection = showModeSelection;
+// Removed showModeSelection from global scope since it's no longer needed in hamburger menu
 
 function resetGameLogic() {
   turnO = true;
