@@ -1,4 +1,22 @@
-/* Shared Game Header Styles for Arcadium */
+/* Shared Game Header Styles for Arcadium 
+   
+   USAGE: Include this CSS file in all game pages along with:
+   <link rel="stylesheet" href="../../css/game-header.css" />
+   
+   For logo fallback support, also include:
+   <script src="../../js/logo-fallback.js"></script>
+*/
+
+/* Ensure header is always visible */
+html, body {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  padding-top: 0 !important;
+  margin-top: 0 !important;
+}
 
 /* Game Header */
 .game-header {
@@ -11,6 +29,8 @@
   flex-wrap: wrap;
   min-height: 70px;
   box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+  z-index: 1000;
+  width: 100%;
 }
 
 /* Brand container */
@@ -18,6 +38,8 @@
   display: flex;
   align-items: center;
   gap: 10px;
+  flex-shrink: 0;
+  z-index: 1001;
 }
 
 /* Logo image */
@@ -25,6 +47,9 @@
   height: 50px;
   width: auto;
   object-fit: contain;
+  display: block;
+  max-width: none;
+  flex-shrink: 0;
 }
 
 /* Game title next to logo */
@@ -60,7 +85,7 @@
   border-radius: 8px;
   box-shadow: 0 4px 12px rgba(0,0,0,0.4);
   overflow: hidden;
-  z-index: 1000;
+  z-index: 1002;
   min-width: 180px;
 }
 
@@ -143,6 +168,63 @@
   border-color: #4CAF50;
 }
 
+/* Ensure header stays on top of all game elements */
+.game-header * {
+  position: relative;
+  z-index: inherit;
+}
+
+/* Prevent game canvases and overlays from covering header */
+canvas {
+  position: relative;
+  z-index: 1;
+}
+
+/* Ensure mode selection and other overlays don't cover header */
+.mode-selection,
+.difficulty-selection,
+.game-over-modal,
+.pause-modal {
+  z-index: 999 !important;
+}
+
+/* Fix for logo loading issues */
+.brand img {
+  background: transparent;
+  border: none;
+  outline: none;
+  vertical-align: middle;
+}
+
+/* Ensure logo loads properly */
+.brand img[src*="arcadium-logo.svg"] {
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+}
+
+/* Fallback styling if logo fails to load */
+.brand::before {
+  content: "🎮";
+  font-size: 2rem;
+  margin-right: 10px;
+  display: none;
+}
+
+.brand img:not([src]),
+.brand img[src=""],
+.brand img[src*="undefined"] {
+  display: none;
+}
+
+.brand img:not([src]) + span::before,
+.brand img[src=""] + span::before,
+.brand img[src*="undefined"] + span::before {
+  content: "🎮 ";
+  font-size: 1.5rem;
+  margin-right: 5px;
+}
+
 /* Responsive design */
 @media (max-width: 768px) {
   .brand span {
@@ -161,5 +243,20 @@
   .menu-dropdown button {
     padding: 10px 15px;
     font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .game-header {
+    padding: 8px 15px;
+    min-height: 60px;
+  }
+  
+  .brand img {
+    height: 35px;
+  }
+  
+  .brand span {
+    font-size: 1rem;
   }
 }
