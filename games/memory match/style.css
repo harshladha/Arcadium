@@ -188,8 +188,8 @@ body {
     font-size: 2.5rem;
 }
 
-/* Win Modal */
-.win-modal {
+/* Win Modal and Pause Modal */
+.win-modal, .pause-modal {
     position: fixed;
     top: 0;
     left: 0;
@@ -284,20 +284,28 @@ body {
     }
     
     .game-board {
-        gap: 8px;
+        gap: 6px;
         max-width: 350px;
     }
     
+    .game-board.medium {
+        max-width: 300px;
+    }
+    
+    .game-board.hard {
+        max-width: 280px;
+    }
+    
     .memory-card {
-        min-height: 60px;
+        min-height: 50px;
     }
     
     .card-face {
-        font-size: 1.5rem;
+        font-size: 1.2rem;
     }
     
     .card-front {
-        font-size: 2rem;
+        font-size: 1.5rem;
     }
     
     .difficulty-container h2 {
@@ -307,5 +315,49 @@ body {
     .difficulty-buttons {
         grid-template-columns: 1fr;
         gap: 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    .game-board {
+        gap: 4px;
+        max-width: 280px;
+    }
+    
+    .game-board.medium {
+        max-width: 240px;
+    }
+    
+    .game-board.hard {
+        max-width: 200px;
+    }
+    
+    .memory-card {
+        min-height: 35px;
+    }
+    
+    .card-face {
+        font-size: 1rem;
+    }
+    
+    .card-front {
+        font-size: 1.2rem;
+    }
+    
+    .stats {
+        gap: 15px;
+    }
+    
+    .stat {
+        padding: 8px 12px;
+        min-width: 80px;
+    }
+    
+    .stat-label {
+        font-size: 0.8rem;
+    }
+    
+    .stat-value {
+        font-size: 1rem;
     }
 }

@@ -15,6 +15,12 @@ function showDifficultySelection() {
     document.getElementById('difficultySelection').style.display = 'flex';
     document.getElementById('gameMain').style.display = 'none';
     document.getElementById('winModal').style.display = 'none';
+    document.getElementById('pauseModal').style.display = 'none';
+    document.getElementById('pauseBtn').style.display = 'none';
+    
+    if (window.currentGame && window.currentGame.timerInterval) {
+        clearInterval(window.currentGame.timerInterval);
+    }
 }
 
 // Menu toggle functionality
@@ -53,6 +59,8 @@ class MemoryMatchGame {
         this.startTime = null;
         this.timerInterval = null;
         this.isGameActive = false;
+        this.isPaused = false;
+        this.pausedTime = 0;
         
         // Card symbols for different difficulties
         this.symbols = {
@@ -73,7 +81,6 @@ class MemoryMatchGame {
     init() {
         this.createBoard();
         this.updateStats();
-        this.startTimer();
         
         // Track game start
         if (typeof Stats !== 'undefined') {
@@ -128,13 +135,15 @@ class MemoryMatchGame {
     }
     
     flipCard(card) {
-        if (!this.isGameActive || card.isFlipped || card.isMatched || this.flippedCards.length >= 2) {
+        if (card.isFlipped || card.isMatched || this.flippedCards.length >= 2 || this.isPaused) {
             return;
         }
         
         // Start the game on first card flip
         if (!this.isGameActive) {
             this.isGameActive = true;
+            this.startTimer();
+            document.getElementById('pauseBtn').style.display = 'inline-block';
         }
         
         card.isFlipped = true;
@@ -209,15 +218,32 @@ class MemoryMatchGame {
     }
     
     startTimer() {
-        this.startTime = Date.now();
+        this.startTime = Date.now() - this.pausedTime;
         this.timerInterval = setInterval(() => {
-            if (this.isGameActive) {
+            if (this.isGameActive && !this.isPaused) {
                 const elapsed = Date.now() - this.startTime;
                 const minutes = Math.floor(elapsed / 60000);
                 const seconds = Math.floor((elapsed % 60000) / 1000);
                 this.timerElement.textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
             }
         }, 1000);
+    }
+    
+    pauseGame() {
+        if (!this.isGameActive || this.isPaused) return;
+        
+        this.isPaused = true;
+        this.pausedTime = Date.now() - this.startTime;
+        clearInterval(this.timerInterval);
+        document.getElementById('pauseModal').style.display = 'flex';
+    }
+    
+    resumeGame() {
+        if (!this.isGameActive || !this.isPaused) return;
+        
+        this.isPaused = false;
+        document.getElementById('pauseModal').style.display = 'none';
+        this.startTimer();
     }
     
     updateStats() {
@@ -245,6 +271,18 @@ function startGame(difficulty) {
 function restartSameDifficulty() {
     document.getElementById('winModal').style.display = 'none';
     startGame(window.currentDifficulty);
+}
+
+function pauseGame() {
+    if (window.currentGame) {
+        window.currentGame.pauseGame();
+    }
+}
+
+function resumeGame() {
+    if (window.currentGame) {
+        window.currentGame.resumeGame();
+    }
 }
 
 // Initialize game
