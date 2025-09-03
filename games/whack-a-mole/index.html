@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Whack-a-Mole - Arcadium</title>
+    <link rel="stylesheet" href="../../css/game-header.css" />
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Arcadium Header -->
+    <header class="game-header">
+        <div class="brand">
+            <img src="../../assets/images/arcadium-logo.svg" alt="Arcadium Logo" />
+            <span>Whack-a-Mole</span>
+        </div>
+        <button class="menu-btn" id="menu-btn">☰</button>
+        <nav class="menu-dropdown" id="menu-dropdown">
+            <button onclick="goHome()">🏠 Home</button>
+            <button onclick="goBack()">🎮 Back to Games</button>
+            <button onclick="resetGame()">🔄 Restart</button>
+            <button onclick="showDifficultySelection()">🎯 Difficulty</button>
+        </nav>
+    </header>
+
+    <!-- Difficulty Selection -->
+    <div class="difficulty-selection" id="difficultySelection">
+        <div class="difficulty-container">
+            <h2>Choose Difficulty</h2>
+            <div class="difficulty-buttons">
+                <button class="difficulty-btn" onclick="startGame('easy')">
+                    <div class="difficulty-icon">🟢</div>
+                    <h3>Easy</h3>
+                    <p>Slow moles, 60 seconds</p>
+                </button>
+                <button class="difficulty-btn" onclick="startGame('medium')">
+                    <div class="difficulty-icon">🟡</div>
+                    <h3>Medium</h3>
+                    <p>Normal speed, 45 seconds</p>
+                </button>
+                <button class="difficulty-btn" onclick="startGame('hard')">
+                    <div class="difficulty-icon">🔴</div>
+                    <h3>Hard</h3>
+                    <p>Fast moles, 30 seconds</p>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Game Container -->
+    <main class="game-main" id="gameMain" style="display: none;">
+        <div class="game-info">
+            <div class="stats">
+                <div class="stat">
+                    <span class="stat-label">Score</span>
+                    <span class="stat-value" id="score">0</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-label">Time</span>
+                    <span class="stat-value" id="timer">60</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-label">Hits</span>
+                    <span class="stat-value" id="hits">0</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-label">Misses</span>
+                    <span class="stat-value" id="misses">0</span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="game-board" id="gameBoard">
+            <div class="hole" data-index="0">
+                <div class="mole" id="mole-0">🐹</div>
+            </div>
+            <div class="hole" data-index="1">
+                <div class="mole" id="mole-1">🐹</div>
+            </div>
+            <div class="hole" data-index="2">
+                <div class="mole" id="mole-2">🐹</div>
+            </div>
+            <div class="hole" data-index="3">
+                <div class="mole" id="mole-3">🐹</div>
+            </div>
+            <div class="hole" data-index="4">
+                <div class="mole" id="mole-4">🐹</div>
+            </div>
+            <div class="hole" data-index="5">
+                <div class="mole" id="mole-5">🐹</div>
+            </div>
+            <div class="hole" data-index="6">
+                <div class="mole" id="mole-6">🐹</div>
+            </div>
+            <div class="hole" data-index="7">
+                <div class="mole" id="mole-7">🐹</div>
+            </div>
+            <div class="hole" data-index="8">
+                <div class="mole" id="mole-8">🐹</div>
+            </div>
+        </div>
+        
+        <div class="game-controls">
+            <button class="control-btn" onclick="startCurrentGame()" id="startBtn">🎮 Start Game</button>
+            <button class="control-btn" onclick="pauseGame()" id="pauseBtn" style="display: none;">⏸️ Pause</button>
+        </div>
+    </main>
+
+    <!-- Game Over Modal -->
+    <div class="game-over-modal" id="gameOverModal" style="display: none;">
+        <div class="modal-content">
+            <h2>🎉 Game Over! 🎉</h2>
+            <div class="final-stats">
+                <p>Final Score: <span id="finalScore">0</span></p>
+                <p>Hits: <span id="finalHits">0</span></p>
+                <p>Misses: <span id="finalMisses">0</span></p>
+                <p>Accuracy: <span id="accuracy">0%</span></p>
+                <p id="newHighScore" style="display: none;">🏆 New High Score! 🏆</p>
+            </div>
+            <div class="modal-buttons">
+                <button onclick="startCurrentGame()">🎮 Play Again</button>
+                <button onclick="showDifficultySelection()">🎯 Change Difficulty</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Pause Modal -->
+    <div class="pause-modal" id="pauseModal" style="display: none;">
+        <div class="modal-content">
+            <h2>⏸️ Game Paused</h2>
+            <div class="modal-buttons">
+                <button onclick="resumeGame()">▶️ Resume</button>
+                <button onclick="showDifficultySelection()">🏠 Main Menu</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="../../js/stats.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

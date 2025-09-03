@@ -195,6 +195,66 @@ body {
   box-shadow: 0 8px 20px rgba(0, 180, 219, 0.3);
 }
 
+/* Memory Match Card Styling */
+.memory-match-card {
+  background: linear-gradient(135deg, #6A1B9A, #4A148C);
+  border: 2px solid #E91E63;
+}
+
+.memory-match-card .game-icon {
+  font-size: 4rem;
+  height: 150px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: gameIconFloat 3s ease-in-out infinite;
+}
+
+.memory-match-card:hover {
+  border-color: #FF4081;
+  box-shadow: 0 8px 20px rgba(233, 30, 99, 0.3);
+}
+
+/* 2048 Card Styling */
+.game-2048-card {
+  background: linear-gradient(135deg, #FF6F00, #E65100);
+  border: 2px solid #FFC107;
+}
+
+.game-2048-card .game-icon {
+  font-size: 4rem;
+  height: 150px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: gameIconFloat 3s ease-in-out infinite;
+}
+
+.game-2048-card:hover {
+  border-color: #FFEB3B;
+  box-shadow: 0 8px 20px rgba(255, 193, 7, 0.3);
+}
+
+/* Whack-a-Mole Card Styling */
+.whack-mole-card {
+  background: linear-gradient(135deg, #8BC34A, #689F38);
+  border: 2px solid #CDDC39;
+}
+
+.whack-mole-card .game-icon {
+  font-size: 4rem;
+  height: 150px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: gameIconFloat 3s ease-in-out infinite;
+}
+
+.whack-mole-card:hover {
+  border-color: #FFEB3B;
+  box-shadow: 0 8px 20px rgba(205, 220, 57, 0.3);
+}
+
 @keyframes gameIconFloat {
   0%, 100% { transform: translateY(0px); }
   50% { transform: translateY(-10px); }

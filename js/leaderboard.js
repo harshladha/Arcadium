@@ -36,6 +36,39 @@ const GameConfigs = {
       { key: "snakeBites", label: "Snake Bites" },
       { key: "ladderClimbs", label: "Ladder Climbs" }
     ]
+  },
+  memorymatch: {
+    title: "Memory Match",
+    fields: [
+      { key: "gamesPlayed", label: "Games Played" },
+      { key: "easyWins", label: "Easy Mode Wins" },
+      { key: "mediumWins", label: "Medium Mode Wins" },
+      { key: "hardWins", label: "Hard Mode Wins" },
+      { key: "totalMatches", label: "Total Matches Found" }
+    ]
+  },
+  "2048": {
+    title: "2048",
+    fields: [
+      { key: "gamesPlayed", label: "Games Played" },
+      { key: "wins", label: "Games Won (Reached 2048)" },
+      { key: "highScore", label: "High Score" },
+      { key: "totalScore", label: "Total Score" },
+      { key: "totalMoves", label: "Total Moves" }
+    ]
+  },
+  whackamole: {
+    title: "Whack-a-Mole",
+    fields: [
+      { key: "gamesPlayed", label: "Games Played" },
+      { key: "easyHighScore", label: "Easy High Score" },
+      { key: "mediumHighScore", label: "Medium High Score" },
+      { key: "hardHighScore", label: "Hard High Score" },
+      { key: "totalHits", label: "Total Hits" },
+      { key: "totalMisses", label: "Total Misses" },
+      { key: "goldenMoleHits", label: "Golden Mole Hits" },
+      { key: "bombHits", label: "Bomb Hits" }
+    ]
   }
 };
 

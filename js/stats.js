@@ -15,6 +15,24 @@ const Stats = {
       totalRolls: 0,
       snakeBites: 0,
       ladderClimbs: 0,
+      // Memory Match stats
+      totalMatches: 0,
+      easyWins: 0,
+      mediumWins: 0,
+      hardWins: 0,
+      // 2048 stats
+      totalMoves: 0,
+      wins: 0,
+      highScore: 0,
+      totalScore: 0,
+      // Whack-a-Mole stats
+      totalHits: 0,
+      totalMisses: 0,
+      goldenMoleHits: 0,
+      bombHits: 0,
+      easyHighScore: 0,
+      mediumHighScore: 0,
+      hardHighScore: 0,
     };
 
     const saved = localStorage.getItem(`arcadium_stats_${game}`);
@@ -86,5 +104,86 @@ const Stats = {
     }
     
     this.saveStats('snakeandladder', stats);
+  },
+
+  // Memory Match specific tracking
+  trackMemoryMatch(action, data = {}) {
+    const stats = this.getStats('memorymatch');
+    
+    switch(action) {
+      case 'gameStart':
+        stats.gamesPlayed++;
+        break;
+      case 'gameEnd':
+        if (data.difficulty === 'easy') stats.easyWins++;
+        else if (data.difficulty === 'medium') stats.mediumWins++;
+        else if (data.difficulty === 'hard') stats.hardWins++;
+        break;
+      case 'match':
+        stats.totalMatches++;
+        break;
+    }
+    
+    this.saveStats('memorymatch', stats);
+  },
+
+  // 2048 specific tracking
+  track2048(action, data = {}) {
+    const stats = this.getStats('2048');
+    
+    switch(action) {
+      case 'gameStart':
+        stats.gamesPlayed++;
+        break;
+      case 'move':
+        stats.totalMoves++;
+        if (data.score > (stats.highScore || 0)) {
+          stats.highScore = data.score;
+        }
+        break;
+      case 'win':
+        stats.wins++;
+        stats.totalScore += data.score;
+        break;
+      case 'gameOver':
+        stats.totalScore += data.score;
+        if (data.score > (stats.highScore || 0)) {
+          stats.highScore = data.score;
+        }
+        break;
+    }
+    
+    this.saveStats('2048', stats);
+  },
+
+  // Whack-a-Mole specific tracking
+  trackWhackAMole(action, data = {}) {
+    const stats = this.getStats('whackamole');
+    
+    switch(action) {
+      case 'gameStart':
+        stats.gamesPlayed++;
+        break;
+      case 'hit':
+        stats.totalHits++;
+        if (data.moleType === 'golden') stats.goldenMoleHits++;
+        else if (data.moleType === 'bomb') stats.bombHits++;
+        break;
+      case 'miss':
+        stats.totalMisses++;
+        break;
+      case 'gameEnd':
+        stats.totalScore += data.score;
+        if (data.difficulty === 'easy' && data.score > (stats.easyHighScore || 0)) {
+          stats.easyHighScore = data.score;
+        } else if (data.difficulty === 'medium' && data.score > (stats.mediumHighScore || 0)) {
+          stats.mediumHighScore = data.score;
+        } else if (data.difficulty === 'hard' && data.score > (stats.hardHighScore || 0)) {
+          stats.hardHighScore = data.score;
+        }
+        break;
+    }
+    
+    this.saveStats('whackamole', stats);
   }
 };
