@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Logo Test</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            background: #0A0A23;
+            color: white;
+        }
+        .test-container {
+            margin: 20px 0;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+        }
+        .logo-test {
+            height: 50px;
+            width: auto;
+            border: 2px solid red;
+            background: yellow;
+        }
+    </style>
+</head>
+<body>
+    <h1>Arcadium Logo Test</h1>
+    
+    <div class="test-container">
+        <h2>Direct SVG Path Test</h2>
+        <img src="assets/images/arcadium-logo.svg" alt="Logo Test" class="logo-test" id="logo1">
+        <p id="status1">Loading...</p>
+    </div>
+    
+    <div class="test-container">
+        <h2>Game Path Test (from games folder)</h2>
+        <img src="../../assets/images/arcadium-logo.svg" alt="Logo Test" class="logo-test" id="logo2">
+        <p id="status2">Loading...</p>
+    </div>
+    
+    <div class="test-container">
+        <h2>SVG Content Preview</h2>
+        <div id="svg-content"></div>
+    </div>
+
+    <script>
+        // Test logo loading
+        const logo1 = document.getElementById('logo1');
+        const logo2 = document.getElementById('logo2');
+        const status1 = document.getElementById('status1');
+        const status2 = document.getElementById('status2');
+        
+        logo1.onload = () => status1.textContent = '✅ Logo 1 loaded successfully!';
+        logo1.onerror = () => status1.textContent = '❌ Logo 1 failed to load';
+        
+        logo2.onload = () => status2.textContent = '✅ Logo 2 loaded successfully!';
+        logo2.onerror = () => status2.textContent = '❌ Logo 2 failed to load';
+        
+        // Load SVG content
+        fetch('assets/images/arcadium-logo.svg')
+            .then(response => response.text())
+            .then(svgContent => {
+                document.getElementById('svg-content').innerHTML = svgContent;
+            })
+            .catch(error => {
+                document.getElementById('svg-content').innerHTML = '❌ Failed to load SVG content: ' + error;
+            });
+    </script>
+</body>
+</html>

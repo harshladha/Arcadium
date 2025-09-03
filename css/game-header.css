@@ -45,11 +45,37 @@ body {
 /* Logo image */
 .brand img {
   height: 50px;
-  width: auto;
+  width: 50px;
   object-fit: contain;
-  display: block;
+  display: block !important;
   max-width: none;
   flex-shrink: 0;
+  border: none;
+  outline: none;
+  vertical-align: middle;
+  visibility: visible !important;
+  opacity: 1 !important;
+  /* Fallback background in case SVG fails */
+  background: linear-gradient(45deg, #9C27B0, #00E5FF);
+  border-radius: 50%;
+  position: relative;
+}
+
+/* Add a fallback icon inside the logo container */
+.brand img::after {
+  content: "🎮";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 1.5rem;
+  display: none;
+}
+
+/* Show fallback icon if image fails to load */
+.brand img[src=""]::after,
+.brand img:not([src])::after {
+  display: block;
 }
 
 /* Game title next to logo */
@@ -188,41 +214,36 @@ canvas {
   z-index: 999 !important;
 }
 
-/* Fix for logo loading issues */
+/* Logo loading and error handling */
+
+/* Comprehensive logo fallback system */
 .brand img {
-  background: transparent;
-  border: none;
-  outline: none;
-  vertical-align: middle;
+  /* Force logo to attempt loading */
+  min-width: 50px;
+  min-height: 50px;
 }
 
-/* Ensure logo loads properly */
-.brand img[src*="arcadium-logo.svg"] {
-  display: block !important;
-  visibility: visible !important;
-  opacity: 1 !important;
-}
-
-/* Fallback styling if logo fails to load */
-.brand::before {
-  content: "🎮";
-  font-size: 2rem;
-  margin-right: 10px;
-  display: none;
-}
-
+/* Fallback for failed logo loads */
 .brand img:not([src]),
 .brand img[src=""],
 .brand img[src*="undefined"] {
-  display: none;
+  display: none !important;
 }
 
+/* Add emoji fallback when logo fails */
 .brand img:not([src]) + span::before,
 .brand img[src=""] + span::before,
-.brand img[src*="undefined"] + span::before {
+.brand img[src*="undefined"] + span::before,
+.brand:has(img[style*="display: none"]) span::before {
   content: "🎮 ";
   font-size: 1.5rem;
   margin-right: 5px;
+}
+
+/* Ensure brand text is always visible */
+.brand span {
+  display: inline-block !important;
+  visibility: visible !important;
 }
 
 /* Responsive design */

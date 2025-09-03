@@ -3,11 +3,22 @@
 A browser-based game hub starting with Tic Tac Toe.
 
 ## 🌟 Features
-- Single-player Tic Tac Toe
-- Clean HTML, CSS, JavaScript implementation
-- Fully responsive layout
-- Deploys automatically with GitHub Pages
+- 🎲 **10 Games Available**  
+  - Tic Tac Toe  
+  - Rock Paper Scissors  
+  - Snake and Ladder  
+  - Memory Match  
+  - 2048  
+  - Whack-a-Mole  
+  - Tetris *(NEW)*  
+  - Snake *(NEW)*  
+  - Pong *(NEW)*  
+  - Breakout *(NEW)*  
 
+- ⚡ Fully responsive layout  
+- 🖥️ Works directly in the browser (no setup required)  
+- 🔄 Automatic deployment with GitHub Pages
+  
 ## 🚀 Live Demo
 [👉 Play here](
 https://harshladha.github.io/Arcadium/)
