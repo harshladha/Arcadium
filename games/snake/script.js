@@ -395,4 +395,17 @@ function changeDirection(direction) {
 document.addEventListener('DOMContentLoaded', () => {
     // Show difficulty selection by default
     showDifficultySelection();
+    
+    // Add swipe support for mobile
+    if (window.mobileUtils && window.mobileUtils.isMobile) {
+        const gameCanvas = document.getElementById('gameCanvas');
+        if (gameCanvas) {
+            window.mobileUtils.addSwipeListener(gameCanvas, {
+                up: () => changeDirection('up'),
+                down: () => changeDirection('down'),
+                left: () => changeDirection('left'),
+                right: () => changeDirection('right')
+            });
+        }
+    }
 });

@@ -443,7 +443,40 @@ function undoMove() {
     }
 }
 
+// Mobile control functions
+function mobileSwipe(direction) {
+    if (gameState.gameOver || gameState.won) return;
+    
+    switch (direction) {
+        case 'up':
+            moveUp();
+            break;
+        case 'down':
+            moveDown();
+            break;
+        case 'left':
+            moveLeft();
+            break;
+        case 'right':
+            moveRight();
+            break;
+    }
+}
+
 // Initialize game
 document.addEventListener('DOMContentLoaded', () => {
     newGame();
+    
+    // Add swipe support for mobile
+    if (window.mobileUtils && window.mobileUtils.isMobile) {
+        const gameBoard = document.getElementById('gameBoard');
+        if (gameBoard) {
+            window.mobileUtils.addSwipeListener(gameBoard, {
+                up: () => mobileSwipe('up'),
+                down: () => mobileSwipe('down'),
+                left: () => mobileSwipe('left'),
+                right: () => mobileSwipe('right')
+            });
+        }
+    }
 });

@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>2048 - Arcadium</title>
     <link rel="stylesheet" href="../../css/game-header.css" />
+    <link rel="stylesheet" href="../../css/mobile-styles.css" />
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -49,6 +50,16 @@
             <button class="control-btn" onclick="newGame()">🎮 New Game</button>
             <button class="control-btn" onclick="undoMove()" id="undoBtn" disabled>↶ Undo</button>
         </div>
+        
+        <!-- Mobile Controls -->
+        <div class="mobile-controls" id="mobileControls">
+            <div class="mobile-dpad">
+                <button class="control-btn dpad-top" ontouchstart="mobileSwipe('up')" onclick="mobileSwipe('up')">↑</button>
+                <button class="control-btn dpad-left" ontouchstart="mobileSwipe('left')" onclick="mobileSwipe('left')">←</button>
+                <button class="control-btn dpad-right" ontouchstart="mobileSwipe('right')" onclick="mobileSwipe('right')">→</button>
+                <button class="control-btn dpad-bottom" ontouchstart="mobileSwipe('down')" onclick="mobileSwipe('down')">↓</button>
+            </div>
+        </div>
     </main>
 
     <!-- Game Over Modal -->
@@ -81,6 +92,8 @@
     </div>
 
     <script src="../../js/stats.js"></script>
+    <script src="../../js/mobile-utils.js"></script>
+    <script src="../../js/logo-fallback.js"></script>
     <script src="script.js"></script>
 </body>
 </html>

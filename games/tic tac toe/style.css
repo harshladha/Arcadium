@@ -10,6 +10,8 @@ body {
   font-family: 'Poppins', sans-serif;
   background: #0A0A23;
   color: #fff;
+  user-select: none;
+  touch-action: manipulation;
 }
 
 /* Game Container */
@@ -122,4 +124,33 @@ body {
     height: 80px;
     font-size: 2rem;
   }
+}/* Mob
+ile optimizations */
+@media (max-width: 768px) {
+  .box {
+    min-height: 60px !important;
+    font-size: 2rem !important;
+    touch-action: manipulation;
+  }
+  
+  .game {
+    gap: 8px !important;
+  }
+  
+  .mode-selection button {
+    padding: 15px 25px !important;
+    font-size: 1.1rem !important;
+    touch-action: manipulation;
+  }
+}
+
+/* Touch feedback */
+.box:active {
+  transform: scale(0.95);
+  transition: transform 0.1s ease;
+}
+
+.mode-selection button:active {
+  transform: scale(0.95);
+  transition: transform 0.1s ease;
 }

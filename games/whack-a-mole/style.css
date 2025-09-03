@@ -410,4 +410,43 @@ body {
     .mole.up {
         bottom: 5px;
     }
+}/*
+ Mobile optimizations */
+@media (max-width: 768px) {
+  .hole {
+    width: 80px !important;
+    height: 80px !important;
+    touch-action: manipulation;
+  }
+  
+  .mole {
+    font-size: 2rem !important;
+  }
+  
+  .difficulty-btn {
+    padding: 15px 20px !important;
+    touch-action: manipulation;
+  }
+  
+  .control-btn {
+    padding: 12px 20px !important;
+    font-size: 1rem !important;
+    touch-action: manipulation;
+  }
+}
+
+/* Touch feedback */
+.hole:active {
+  transform: scale(0.9);
+  transition: transform 0.1s ease;
+}
+
+.difficulty-btn:active {
+  transform: scale(0.95);
+  transition: transform 0.1s ease;
+}
+
+.control-btn:active {
+  transform: scale(0.95);
+  transition: transform 0.1s ease;
 }

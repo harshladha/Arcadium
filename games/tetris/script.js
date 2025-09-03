@@ -502,6 +502,34 @@ function resumeGame() {
     }
 }
 
+// Mobile control functions
+function mobileMove(direction) {
+    if (!window.tetrisGame || !window.tetrisGame.isGameActive || window.tetrisGame.isPaused) return;
+    
+    const game = window.tetrisGame;
+    switch (direction) {
+        case 'left':
+            game.movePiece(-1, 0);
+            break;
+        case 'right':
+            game.movePiece(1, 0);
+            break;
+        case 'down':
+            game.movePiece(0, 1);
+            break;
+    }
+}
+
+function mobileRotate() {
+    if (!window.tetrisGame || !window.tetrisGame.isGameActive || window.tetrisGame.isPaused) return;
+    window.tetrisGame.rotatePiece();
+}
+
+function mobileHardDrop() {
+    if (!window.tetrisGame || !window.tetrisGame.isGameActive || window.tetrisGame.isPaused) return;
+    window.tetrisGame.hardDrop();
+}
+
 // Initialize game
 document.addEventListener('DOMContentLoaded', () => {
     window.tetrisGame = new TetrisGame();

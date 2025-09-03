@@ -62,14 +62,21 @@ function resetGameLogic() {
 window.resetGameLogic = resetGameLogic;
 
 boxes.forEach((box) => {
-  box.addEventListener("click", () => {
+  const handleBoxClick = () => {
     if (box.innerText !== "") return;
     if (gameMode === "multiplayer") {
       handleMultiplayerMove(box);
     } else if (gameMode === "computer") {
       handlePlayerMove(box);
     }
-  });
+  };
+  
+  box.addEventListener("click", handleBoxClick);
+  
+  // Add touch support for mobile
+  if (typeof MobileUtils !== 'undefined') {
+    MobileUtils.addTouchSupport(box, handleBoxClick);
+  }
 });
 
 function handleMultiplayerMove(box) {

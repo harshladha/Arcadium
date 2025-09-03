@@ -11,6 +11,8 @@ body {
     color: #FFFFFF;
     margin: 0;
     min-height: 100vh;
+    user-select: none;
+    touch-action: manipulation;
 }
 
 /* Game-specific styles - header styles are in shared game-header.css */
@@ -599,4 +601,39 @@ body {
     .square.snake-tail::before, .square.ladder-top::before {
         font-size: 0.8rem;
     }
+}/* Mobile o
+ptimizations */
+@media (max-width: 768px) {
+  .square {
+    min-height: 35px !important;
+    min-width: 35px !important;
+    font-size: 0.8rem !important;
+  }
+  
+  .roll-btn {
+    padding: 15px 25px !important;
+    font-size: 1.1rem !important;
+    touch-action: manipulation;
+  }
+  
+  .dice {
+    width: 60px !important;
+    height: 60px !important;
+  }
+  
+  .mode-btn {
+    padding: 15px 20px !important;
+    touch-action: manipulation;
+  }
+}
+
+/* Touch feedback */
+.roll-btn:active {
+  transform: scale(0.95);
+  transition: transform 0.1s ease;
+}
+
+.mode-btn:active {
+  transform: scale(0.95);
+  transition: transform 0.1s ease;
 }

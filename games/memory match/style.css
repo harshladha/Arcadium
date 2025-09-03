@@ -11,6 +11,8 @@ body {
     color: #FFFFFF;
     margin: 0;
     min-height: 100vh;
+    user-select: none;
+    touch-action: manipulation;
 }
 
 /* Difficulty Selection Screen */
@@ -360,4 +362,40 @@ body {
     .stat-value {
         font-size: 1rem;
     }
+}/* Mobile o
+ptimizations */
+@media (max-width: 768px) {
+  .memory-card {
+    min-height: 60px !important;
+    min-width: 60px !important;
+    touch-action: manipulation;
+  }
+  
+  .game-board.easy {
+    gap: 8px !important;
+  }
+  
+  .game-board.medium {
+    gap: 6px !important;
+  }
+  
+  .game-board.hard {
+    gap: 4px !important;
+  }
+  
+  .difficulty-btn {
+    padding: 15px 20px !important;
+    touch-action: manipulation;
+  }
+}
+
+/* Touch feedback */
+.memory-card:active {
+  transform: scale(0.95);
+  transition: transform 0.1s ease;
+}
+
+.difficulty-btn:active {
+  transform: scale(0.95);
+  transition: transform 0.1s ease;
 }

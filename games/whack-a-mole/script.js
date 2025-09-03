@@ -91,16 +91,28 @@ class WhackAMoleGame {
         // Add click listeners to holes
         const holes = document.querySelectorAll('.hole');
         holes.forEach((hole, index) => {
-            hole.addEventListener('click', () => this.hitHole(index));
+            const holeHandler = () => this.hitHole(index);
+            hole.addEventListener('click', holeHandler);
+            
+            // Add touch support for mobile
+            if (typeof MobileUtils !== 'undefined') {
+                MobileUtils.addTouchSupport(hole, holeHandler);
+            }
         });
         
         // Add click listeners to moles
         const moles = document.querySelectorAll('.mole');
         moles.forEach((mole, index) => {
-            mole.addEventListener('click', (e) => {
+            const moleHandler = (e) => {
                 e.stopPropagation();
                 this.hitMole(index);
-            });
+            };
+            mole.addEventListener('click', moleHandler);
+            
+            // Add touch support for mobile
+            if (typeof MobileUtils !== 'undefined') {
+                MobileUtils.addTouchSupport(mole, moleHandler);
+            }
         });
     }
     

@@ -54,10 +54,17 @@ const playGame = (userChoice) => {
 };
 
 choices.forEach((choice) => {
-  choice.addEventListener("click", () => {
+  const choiceHandler = () => {
     const userChoice = choice.getAttribute("id");
     playGame(userChoice);
-  });
+  };
+  
+  choice.addEventListener("click", choiceHandler);
+  
+  // Add touch support for mobile
+  if (typeof MobileUtils !== 'undefined') {
+    MobileUtils.addTouchSupport(choice, choiceHandler);
+  }
 });
 
 function resetGameLogic() {

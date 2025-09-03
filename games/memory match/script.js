@@ -129,7 +129,13 @@ class MemoryMatchGame {
             isMatched: false
         };
         
-        cardElement.addEventListener('click', () => this.flipCard(card));
+        const cardHandler = () => this.flipCard(card);
+        cardElement.addEventListener('click', cardHandler);
+        
+        // Add touch support for mobile
+        if (typeof MobileUtils !== 'undefined') {
+            MobileUtils.addTouchSupport(cardElement, cardHandler);
+        }
         
         return card;
     }

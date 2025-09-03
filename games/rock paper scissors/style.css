@@ -8,9 +8,11 @@
 /* Body */
 body {
   text-align: center;
-  font-family: 'Poppins', sans-serif;
+  font-family: 'Poppins', sans-style;
   background: #0A0A23;
   color: #fff;
+  user-select: none;
+  touch-action: manipulation;
 }
 
 /* Game Title */
@@ -126,4 +128,32 @@ h1 {
     height: 4rem;
     line-height: 4rem;
   }
+}/* 
+Mobile optimizations */
+@media (max-width: 768px) {
+  .choice {
+    min-height: 80px !important;
+    min-width: 80px !important;
+    touch-action: manipulation;
+  }
+  
+  .choice img {
+    max-width: 60px !important;
+    max-height: 60px !important;
+  }
+  
+  .choices {
+    gap: 15px !important;
+  }
+}
+
+/* Touch feedback */
+.choice:active {
+  transform: scale(0.9);
+  transition: transform 0.1s ease;
+}
+
+.choice:hover {
+  transform: scale(1.05);
+  transition: transform 0.2s ease;
 }

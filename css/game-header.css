@@ -2,10 +2,15 @@
    
    USAGE: Include this CSS file in all game pages along with:
    <link rel="stylesheet" href="../../css/game-header.css" />
+   <link rel="stylesheet" href="../../css/mobile-styles.css" />
    
-   For logo fallback support, also include:
+   For mobile and logo support, also include:
+   <script src="../../js/mobile-utils.js"></script>
    <script src="../../js/logo-fallback.js"></script>
 */
+
+/* Import mobile styles */
+@import url('mobile-styles.css');
 
 /* Ensure header is always visible */
 html, body {

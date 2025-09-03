@@ -76,7 +76,13 @@ class SnakeAndLadderGame {
     
     init() {
         this.createBoard();
-        this.rollBtn.addEventListener('click', () => this.rollDice());
+        const rollHandler = () => this.rollDice();
+        this.rollBtn.addEventListener('click', rollHandler);
+        
+        // Add touch support for mobile
+        if (typeof MobileUtils !== 'undefined') {
+            MobileUtils.addTouchSupport(this.rollBtn, rollHandler);
+        }
         this.updateDisplay();
     }
     

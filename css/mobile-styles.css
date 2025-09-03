@@ -1,0 +1,414 @@
+/* Mobile Styles for Arcadium Games */
+
+/* Mobile device detection */
+.mobile-device {
+    -webkit-text-size-adjust: 100%;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.touch-device {
+    touch-action: manipulation;
+}
+
+/* Safe area handling for notched devices */
+body {
+    padding-top: var(--safe-area-top, 0);
+    padding-bottom: var(--safe-area-bottom, 0);
+    padding-left: var(--safe-area-left, 0);
+    padding-right: var(--safe-area-right, 0);
+}
+
+/* Mobile-specific header adjustments */
+@media (max-width: 768px) {
+    .game-header {
+        padding: 8px 15px;
+        min-height: 60px;
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+    }
+    
+    .brand img {
+        height: 35px;
+    }
+    
+    .brand span {
+        font-size: 1rem;
+    }
+    
+    .menu-btn {
+        font-size: 1.5rem;
+        padding: 8px;
+    }
+}
+
+/* Mobile game containers */
+@media (max-width: 768px) {
+    .game-main {
+        padding: 10px;
+        min-height: calc(100vh - 60px);
+    }
+    
+    .game-container {
+        width: 100%;
+        max-width: 100vw;
+        overflow: hidden;
+    }
+    
+    canvas {
+        max-width: 100%;
+        height: auto;
+        touch-action: none;
+    }
+}
+
+/* Mobile controls base styles */
+.mobile-controls {
+    display: none;
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 999;
+    gap: 15px;
+    padding: 15px;
+    background: rgba(0, 0, 0, 0.8);
+    border-radius: 15px;
+    backdrop-filter: blur(10px);
+}
+
+@media (max-width: 768px) {
+    .mobile-controls {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+    }
+}
+
+/* Touch-friendly buttons */
+.touch-btn,
+.control-btn,
+.direction-btn {
+    min-width: 60px;
+    min-height: 60px;
+    border: 2px solid #00B4DB;
+    background: linear-gradient(135deg, #003566, #001D3D);
+    color: white;
+    border-radius: 50%;
+    font-size: 1.5rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.touch-btn:active,
+.control-btn:active,
+.direction-btn:active,
+.touch-btn.active,
+.control-btn.active,
+.direction-btn.active {
+    transform: scale(0.95);
+    background: linear-gradient(135deg, #00B4DB, #4CAF50);
+    box-shadow: 0 0 20px rgba(0, 180, 219, 0.5);
+}
+
+/* D-Pad controls */
+.mobile-dpad {
+    display: grid;
+    grid-template-areas: 
+        ". up ."
+        "left center right"
+        ". down .";
+    gap: 10px;
+    width: 200px;
+    height: 200px;
+}
+
+.dpad-top { grid-area: up; }
+.dpad-left { grid-area: left; }
+.dpad-right { grid-area: right; }
+.dpad-bottom { grid-area: down; }
+
+/* Paddle controls */
+.mobile-paddle-controls {
+    display: flex;
+    gap: 20px;
+    width: 100%;
+    justify-content: space-between;
+    max-width: 300px;
+}
+
+.paddle-left,
+.paddle-right {
+    flex: 1;
+    min-width: 80px;
+    border-radius: 15px;
+}
+
+/* Game-specific mobile layouts */
+
+/* Tetris mobile layout */
+@media (max-width: 768px) {
+    .game-layout {
+        grid-template-columns: 1fr;
+        grid-template-areas: 
+            "stats"
+            "game"
+            "controls";
+        gap: 15px;
+    }
+    
+    .left-panel {
+        grid-area: stats;
+        flex-direction: row;
+        justify-content: space-around;
+        flex-wrap: wrap;
+    }
+    
+    .game-center {
+        grid-area: game;
+    }
+    
+    .right-panel {
+        grid-area: controls;
+    }
+    
+    .stats-container {
+        flex-direction: row;
+        gap: 10px;
+    }
+    
+    .stat-box {
+        flex: 1;
+        min-width: 80px;
+        padding: 10px;
+    }
+    
+    .stat-value {
+        font-size: 1.4rem;
+    }
+    
+    #gameCanvas {
+        width: 100%;
+        max-width: 300px;
+        height: auto;
+    }
+    
+    .next-piece-container {
+        max-width: 120px;
+    }
+}
+
+/* Snake mobile layout */
+@media (max-width: 768px) {
+    .stats {
+        gap: 15px;
+        margin-bottom: 15px;
+    }
+    
+    .stat {
+        flex: 1;
+        min-width: 80px;
+        text-align: center;
+        background: rgba(0, 53, 102, 0.3);
+        padding: 10px;
+        border-radius: 8px;
+        border: 1px solid #00B4DB;
+    }
+    
+    .control-row {
+        display: flex;
+        gap: 10px;
+        justify-content: center;
+        align-items: center;
+    }
+    
+    .control-row:first-child {
+        margin-bottom: 10px;
+    }
+}
+
+/* Pong mobile layout */
+@media (max-width: 768px) {
+    .scoreboard {
+        font-size: 0.9rem;
+        gap: 15px;
+        margin-bottom: 15px;
+    }
+    
+    .player-controls {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+        flex: 1;
+    }
+    
+    .player-controls h5 {
+        margin: 0;
+        font-size: 0.9rem;
+        color: #00B4DB;
+    }
+    
+    .controls-info {
+        display: none;
+    }
+}
+
+/* 2048 mobile layout */
+@media (max-width: 768px) {
+    .game-board {
+        width: 90vw;
+        height: 90vw;
+        max-width: 400px;
+        max-height: 400px;
+    }
+    
+    .tile {
+        font-size: calc(1rem + 1vw);
+    }
+    
+    .game-stats {
+        flex-direction: row;
+        gap: 15px;
+        margin-bottom: 15px;
+    }
+    
+    .stat-item {
+        flex: 1;
+        text-align: center;
+    }
+}
+
+/* Modal adjustments for mobile */
+@media (max-width: 768px) {
+    .modal-content {
+        width: 90%;
+        max-width: 400px;
+        margin: 20px;
+        padding: 20px;
+    }
+    
+    .modal-buttons {
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+    .modal-buttons button {
+        width: 100%;
+        padding: 15px;
+        font-size: 1rem;
+    }
+}
+
+/* Mode selection mobile */
+@media (max-width: 768px) {
+    .mode-buttons,
+    .difficulty-buttons {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+    
+    .mode-btn,
+    .difficulty-btn {
+        padding: 25px 20px;
+    }
+    
+    .mode-icon,
+    .difficulty-icon {
+        font-size: 3rem;
+    }
+    
+    .mode-container h2,
+    .difficulty-container h2 {
+        font-size: 2rem;
+        margin-bottom: 30px;
+    }
+}
+
+/* Landscape orientation adjustments */
+@media (max-width: 768px) and (orientation: landscape) {
+    .game-main {
+        padding: 5px;
+    }
+    
+    .mobile-controls {
+        bottom: 10px;
+        padding: 10px;
+    }
+    
+    .game-header {
+        min-height: 50px;
+        padding: 5px 15px;
+    }
+    
+    .brand img {
+        height: 30px;
+    }
+    
+    .brand span {
+        font-size: 0.9rem;
+    }
+}
+
+/* Prevent text selection on mobile */
+.mobile-device * {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+/* Allow text selection for specific elements */
+.mobile-device input,
+.mobile-device textarea,
+.mobile-device [contenteditable] {
+    -webkit-user-select: text;
+    -moz-user-select: text;
+    -ms-user-select: text;
+    user-select: text;
+}
+
+/* Improve touch targets */
+@media (max-width: 768px) {
+    button,
+    .clickable {
+        min-height: 44px;
+        min-width: 44px;
+    }
+    
+    a {
+        min-height: 44px;
+        display: inline-flex;
+        align-items: center;
+    }
+}
+
+/* Loading states for mobile */
+.mobile-loading {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(0, 0, 0, 0.9);
+    color: white;
+    padding: 20px;
+    border-radius: 10px;
+    z-index: 9999;
+}
+
+/* Vibration feedback class */
+.vibrate-on-touch {
+    transition: transform 0.1s ease;
+}
+
+.vibrate-on-touch:active {
+    transform: scale(0.98);
+}
