@@ -25,6 +25,7 @@ const winPatterns = [
 function startVsComputer() {
   gameMode = "computer";
   document.getElementById("modeSelection").style.display = "none";
+  document.getElementById("gameContainer").style.display = "flex";
   resetGameLogic();
   enableBoxes(); // Enable boxes after mode selection
 }
@@ -32,9 +33,23 @@ function startVsComputer() {
 function startMultiplayer() {
   gameMode = "multiplayer";
   document.getElementById("modeSelection").style.display = "none";
+  document.getElementById("gameContainer").style.display = "flex";
   resetGameLogic();
   enableBoxes(); // Enable boxes after mode selection
 }
+
+function showModeSelection() {
+  gameMode = ""; // Reset game mode
+  document.getElementById("modeSelection").style.display = "flex";
+  document.getElementById("gameContainer").style.display = "none";
+  disableBoxes(); // Disable boxes when showing mode selection
+  msgContainer.classList.add("hide"); // Hide any win messages
+}
+
+// Make functions globally accessible
+window.startVsComputer = startVsComputer;
+window.startMultiplayer = startMultiplayer;
+window.showModeSelection = showModeSelection;
 
 function resetGameLogic() {
   turnO = true;
@@ -42,6 +57,9 @@ function resetGameLogic() {
   enableBoxes();
   msgContainer.classList.add("hide");
 }
+
+// Make resetGameLogic globally accessible
+window.resetGameLogic = resetGameLogic;
 
 boxes.forEach((box) => {
   box.addEventListener("click", () => {
@@ -186,7 +204,17 @@ function checkWinner() {
 newGameBtn.addEventListener("click", resetGameLogic);
 // Removed resetBtn event listener since reset button does not exist in HTML
 
-window.addEventListener("pageshow", () => {
+// Initialize game on page load
+document.addEventListener("DOMContentLoaded", () => {
+  // Show mode selection and hide game initially
   document.getElementById("modeSelection").style.display = "flex";
+  document.getElementById("gameContainer").style.display = "none";
+  disableBoxes(); // Disable boxes initially
+});
+
+window.addEventListener("pageshow", () => {
+  // Always show mode selection on page show
+  document.getElementById("modeSelection").style.display = "flex";
+  document.getElementById("gameContainer").style.display = "none";
   disableBoxes(); // Disable boxes initially on page show
 });

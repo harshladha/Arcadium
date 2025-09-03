@@ -32,14 +32,14 @@
   </div>
 
   <!-- Mode Selection Overlay -->
-  <div class="mode-selection" id="modeSelection" style="display:flex;">
+  <div class="mode-selection" id="modeSelection" style="display:none;">
     <h2>Select Game Mode</h2>
     <button onclick="startVsComputer()">Against Computer</button>
     <button onclick="startMultiplayer()">Multiplayer</button>
   </div>
 
   <!-- Game Container -->
-  <main class="game-container">
+  <main class="game-container" id="gameContainer">
     <div class="game">
       <button class="box"></button>
       <button class="box"></button>
@@ -70,7 +70,7 @@
     }
 
     function resetGame() {
-      resetGameLogic();
+      location.reload();
     }
 
     // Close menu when clicking outside
