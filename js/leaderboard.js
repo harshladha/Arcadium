@@ -131,37 +131,37 @@ document.addEventListener('DOMContentLoaded', () => {
   
   // Add click handlers to each tile
   document.querySelectorAll(".leaderboard-tile").forEach(tile => {
-  const tileHandler = () => {
-    const game = tile.dataset.game;
-    const stats = Stats.getStats(game);
-    const config = GameConfigs[game];
+    const tileHandler = () => {
+      const game = tile.dataset.game;
+      const stats = Stats.getStats(game);
+      const config = GameConfigs[game];
 
-    if (!config) {
-      console.error(`No config found for game: ${game}`);
-      return;
-    }
+      if (!config) {
+        console.error(`No config found for game: ${game}`);
+        return;
+      }
 
-    // Set modal title
-    modalTitle.textContent = config.title + " Stats";
+      // Set modal title
+      modalTitle.textContent = config.title + " Stats";
 
-    // Build stats markup
-    statsList.innerHTML = config.fields
-      .map(field => `<dt>${field.label}</dt><dd>${stats[field.key] ?? 0}</dd>`)
-      .join("");
+      // Build stats markup
+      statsList.innerHTML = config.fields
+        .map(field => `<dt>${field.label}</dt><dd>${stats[field.key] ?? 0}</dd>`)
+        .join("");
 
-    // Show modal
-    leaderboardModal.classList.remove("hide");
+      // Show modal
+      leaderboardModal.classList.remove("hide");
+      
+      // Ensure modal is visible (fallback)
+      leaderboardModal.style.display = "flex";
+    };
     
-    // Ensure modal is visible (fallback)
-    leaderboardModal.style.display = "flex";
-  };
-  
-  tile.addEventListener("click", tileHandler);
-  
-  // Add touch support for mobile
-  if (typeof MobileUtils !== 'undefined') {
-    MobileUtils.addTouchSupport(tile, tileHandler);
-  }
+    tile.addEventListener("click", tileHandler);
+    
+    // Add touch support for mobile
+    if (typeof MobileUtils !== 'undefined') {
+      MobileUtils.addTouchSupport(tile, tileHandler);
+    }
   });
 
   // Close modal
