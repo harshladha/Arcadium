@@ -123,7 +123,7 @@ const GameConfigs = {
 
 // Add click handlers to each tile
 document.querySelectorAll(".leaderboard-tile").forEach(tile => {
-  tile.addEventListener("click", () => {
+  const tileHandler = () => {
     const game = tile.dataset.game;
     const stats = Stats.getStats(game);
     const config = GameConfigs[game];
@@ -143,13 +143,27 @@ document.querySelectorAll(".leaderboard-tile").forEach(tile => {
 
     // Show modal
     leaderboardModal.classList.remove("hide");
-  });
+  };
+  
+  tile.addEventListener("click", tileHandler);
+  
+  // Add touch support for mobile
+  if (typeof MobileUtils !== 'undefined') {
+    MobileUtils.addTouchSupport(tile, tileHandler);
+  }
 });
 
 // Close modal
-closeModal.addEventListener("click", () => {
+const closeHandler = () => {
   leaderboardModal.classList.add("hide");
-});
+};
+
+closeModal.addEventListener("click", closeHandler);
+
+// Add touch support for mobile
+if (typeof MobileUtils !== 'undefined') {
+  MobileUtils.addTouchSupport(closeModal, closeHandler);
+}
 
 // Close modal when clicking outside
 leaderboardModal.addEventListener("click", (e) => {

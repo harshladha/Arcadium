@@ -356,4 +356,32 @@ footer {
   .leaderboard-tile span {
     font-size: 0.9rem;
   }
+}/* Mobile t
+ouch optimizations */
+.leaderboard-tile {
+  touch-action: manipulation;
+  user-select: none;
+}
+
+.leaderboard-tile:active {
+  transform: translateY(-3px) scale(0.98);
+  transition: transform 0.1s ease;
+}
+
+.modal-content button {
+  touch-action: manipulation;
+}
+
+.modal-content button:active {
+  transform: scale(0.95);
+  transition: transform 0.1s ease;
+}
+
+.header-btn {
+  touch-action: manipulation;
+}
+
+.header-btn:active {
+  transform: scale(0.95);
+  transition: transform 0.1s ease;
 }
