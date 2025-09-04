@@ -116,12 +116,87 @@ body {
   box-shadow: 0 8px 16px rgba(0,0,0,0.4);
 }
 
-/* Tile Image */
-.leaderboard-tile img {
+/* Game Thumbnail Styling */
+.game-thumbnail {
   width: 100%;
   height: 150px;
-  object-fit: contain;
-  border-radius: 8px;
+  border-radius: 10px;
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 3rem;
+  background: linear-gradient(135deg, #001D3D, #003566);
+  border: 2px solid rgba(0, 180, 219, 0.3);
+  transition: all 0.3s ease;
+}
+
+.leaderboard-tile:hover .game-thumbnail {
+  border-color: #00B4DB;
+  transform: scale(1.05);
+}
+
+/* Tic Tac Toe */
+#lb-tic-tac-toe {
+  background: linear-gradient(135deg, #FF6B6B, #4ECDC4);
+}
+
+#lb-tic-tac-toe::before {
+  content: "⭕❌";
+}
+
+/* Rock Paper Scissors */
+#lb-rock-paper-scissors {
+  background: linear-gradient(135deg, #FFD93D, #FF6B6B);
+}
+
+#lb-rock-paper-scissors::before {
+  content: "✂️📄🗿";
+  font-size: 2rem;
+}
+
+/* Snake and Ladder */
+#lb-snake-and-ladder {
+  background: linear-gradient(135deg, #4CAF50, #FF6B6B);
+}
+
+#lb-snake-and-ladder::before {
+  content: "🐍🪜";
+}
+
+/* Memory Match */
+#lb-memory-match {
+  background: linear-gradient(135deg, #6A1B9A, #E91E63);
+}
+
+/* 2048 */
+#lb-game-2048 {
+  background: linear-gradient(135deg, #FF6F00, #FFC107);
+}
+
+/* Whack-a-Mole */
+#lb-whack-a-mole {
+  background: linear-gradient(135deg, #8BC34A, #CDDC39);
+}
+
+/* Tetris */
+#lb-tetris {
+  background: linear-gradient(135deg, #2196F3, #9C27B0);
+}
+
+/* Snake */
+#lb-snake {
+  background: linear-gradient(135deg, #4CAF50, #8BC34A);
+}
+
+/* Pong */
+#lb-pong {
+  background: linear-gradient(135deg, #00BCD4, #2196F3);
+}
+
+/* Breakout */
+#lb-breakout {
+  background: linear-gradient(135deg, #FF5722, #FF9800);
 }
 
 /* Tile Label */
@@ -214,17 +289,7 @@ footer {
   margin-top: auto;
 }
 
-/* Special styling for Snake and Ladder tile */
-.leaderboard-tile[data-game="snakeandladder"] .tile-icon {
-  background: linear-gradient(135deg, #4CAF50, #FF6B6B);
-  width: 100%;
-  height: 150px;
-  border-radius: 8px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 3rem;
-}
+
 
 /* Responsive design */
 @media (max-width: 768px) {
@@ -259,8 +324,36 @@ footer {
     padding: 12px;
   }
   
-  .leaderboard-tile img,
-  .leaderboard-tile .tile-icon {
+  .game-thumbnail {
     height: 120px;
+    font-size: 2.5rem;
+  }
+  
+  #lb-rock-paper-scissors::before {
+    font-size: 1.5rem;
+  }
+}
+@media (max-width: 480px) {
+  .leaderboard-grid {
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 10px;
+  }
+  
+  .leaderboard-tile {
+    height: 200px;
+    padding: 10px;
+  }
+  
+  .game-thumbnail {
+    height: 100px;
+    font-size: 2rem;
+  }
+  
+  #lb-rock-paper-scissors::before {
+    font-size: 1.2rem;
+  }
+  
+  .leaderboard-tile span {
+    font-size: 0.9rem;
   }
 }
