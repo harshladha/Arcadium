@@ -121,8 +121,16 @@ const GameConfigs = {
   }
 };
 
-// Add click handlers to each tile
-document.querySelectorAll(".leaderboard-tile").forEach(tile => {
+// Initialize leaderboard when DOM is loaded
+document.addEventListener('DOMContentLoaded', () => {
+  // Check if modal elements exist
+  if (!leaderboardModal || !modalTitle || !statsList || !closeModal) {
+    console.error('Modal elements not found');
+    return;
+  }
+  
+  // Add click handlers to each tile
+  document.querySelectorAll(".leaderboard-tile").forEach(tile => {
   const tileHandler = () => {
     const game = tile.dataset.game;
     const stats = Stats.getStats(game);
@@ -143,6 +151,9 @@ document.querySelectorAll(".leaderboard-tile").forEach(tile => {
 
     // Show modal
     leaderboardModal.classList.remove("hide");
+    
+    // Ensure modal is visible (fallback)
+    leaderboardModal.style.display = "flex";
   };
   
   tile.addEventListener("click", tileHandler);
@@ -151,23 +162,52 @@ document.querySelectorAll(".leaderboard-tile").forEach(tile => {
   if (typeof MobileUtils !== 'undefined') {
     MobileUtils.addTouchSupport(tile, tileHandler);
   }
+  });
+
+  // Close modal
+  const closeHandler = () => {
+    leaderboardModal.classList.add("hide");
+    leaderboardModal.style.display = "none";
+  };
+
+  closeModal.addEventListener("click", closeHandler);
+
+  // Add touch support for mobile
+  if (typeof MobileUtils !== 'undefined') {
+    MobileUtils.addTouchSupport(closeModal, closeHandler);
+  }
+
+  // Close modal when clicking outside
+  leaderboardModal.addEventListener("click", (e) => {
+    if (e.target === leaderboardModal) {
+      leaderboardModal.classList.add("hide");
+      leaderboardModal.style.display = "none";
+    }
+  });
 });
 
-// Close modal
-const closeHandler = () => {
-  leaderboardModal.classList.add("hide");
-};
-
-closeModal.addEventListener("click", closeHandler);
-
-// Add touch support for mobile
-if (typeof MobileUtils !== 'undefined') {
-  MobileUtils.addTouchSupport(closeModal, closeHandler);
+// Function to add sample stats for testing (can be removed later)
+function addSampleStats() {
+  // Add some sample stats for testing
+  const sampleStats = {
+    tictactoe: { vsComputerWins: 5, vsComputerLosses: 3, vsComputerDraws: 2, multiplayerXWins: 4, multiplayerOWins: 3, multiplayerDraws: 1 },
+    rockpaperscissors: { vsComputerWins: 8, vsComputerLosses: 6, vsComputerDraws: 4 },
+    snakeandladder: { gamesPlayed: 10, vsComputerWins: 6, vsComputerLosses: 4, player1Wins: 3, player2Wins: 2, totalRolls: 150, snakeBites: 8, ladderClimbs: 12 },
+    memorymatch: { gamesPlayed: 15, easyWins: 8, mediumWins: 5, hardWins: 2, totalMatches: 120 },
+    '2048': { gamesPlayed: 20, wins: 3, highScore: 15420, totalScore: 85000, totalMoves: 2500 },
+    whackamole: { gamesPlayed: 12, easyHighScore: 850, mediumHighScore: 650, hardHighScore: 420, totalHits: 180, totalMisses: 45, goldenMoleHits: 8, bombHits: 3 },
+    tetris: { gamesPlayed: 25, highScore: 45000, totalScore: 180000, totalLines: 350, tetrises: 15, maxLevel: 8 },
+    snake: { gamesPlayed: 30, easyHighScore: 280, mediumHighScore: 180, hardHighScore: 120, totalScore: 4500, totalFood: 450, maxLength: 35 },
+    pong: { gamesPlayed: 18, aiGames: 12, humanGames: 6, player1Wins: 10, player2Wins: 8, aiEasyWins: 8, aiMediumWins: 3, aiHardWins: 1 },
+    breakout: { gamesPlayed: 22, highScore: 12500, easyHighScore: 8500, mediumHighScore: 6200, hardHighScore: 4100, totalBricks: 850, levelsCompleted: 15, maxLevel: 6 }
+  };
+  
+  Object.keys(sampleStats).forEach(game => {
+    localStorage.setItem(`arcadium_stats_${game}`, JSON.stringify(sampleStats[game]));
+  });
+  
+  console.log('Sample stats added for testing');
 }
 
-// Close modal when clicking outside
-leaderboardModal.addEventListener("click", (e) => {
-  if (e.target === leaderboardModal) {
-    leaderboardModal.classList.add("hide");
-  }
-});
+// Uncomment the line below to add sample stats for testing
+// addSampleStats();
