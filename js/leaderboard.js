@@ -210,4 +210,4 @@ function addSampleStats() {
 }
 
 // Uncomment the line below to add sample stats for testing
-// addSampleStats();
+addSampleStats();

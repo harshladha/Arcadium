@@ -105,6 +105,40 @@ class MobileUtils {
         }));
     }
     
+    // Static method for adding touch support to elements
+    static addTouchSupport(element, handler) {
+        if (!element || typeof handler !== 'function') return;
+        
+        // Add touch events
+        element.addEventListener('touchstart', (e) => {
+            e.preventDefault();
+            element.classList.add('active');
+        });
+        
+        element.addEventListener('touchend', (e) => {
+            e.preventDefault();
+            element.classList.remove('active');
+            handler(e);
+        });
+        
+        element.addEventListener('touchcancel', (e) => {
+            element.classList.remove('active');
+        });
+        
+        // Ensure mouse events still work
+        element.addEventListener('mousedown', () => {
+            element.classList.add('active');
+        });
+        
+        element.addEventListener('mouseup', () => {
+            element.classList.remove('active');
+        });
+        
+        element.addEventListener('mouseleave', () => {
+            element.classList.remove('active');
+        });
+    }
+    
     // Utility method to create touch-friendly buttons
     createTouchButton(text, onClick, className = '') {
         const button = document.createElement('button');
