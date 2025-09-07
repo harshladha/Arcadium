@@ -320,3 +320,36 @@ class MobileUtils {
 document.addEventListener('DOMContentLoaded', () => {
     window.mobileUtils = new MobileUtils();
 });
+
+// Utility function to ensure keyboard events work properly
+MobileUtils.ensureKeyboardFocus = function() {
+    // Ensure the document or game area can receive keyboard events
+    if (document.activeElement === document.body) {
+        // If no element is focused, focus the document
+        document.body.focus();
+    }
+    
+    // Make sure the body is focusable
+    if (!document.body.hasAttribute('tabindex')) {
+        document.body.setAttribute('tabindex', '-1');
+    }
+    
+    // Add click listener to ensure focus on interaction
+    document.addEventListener('click', () => {
+        if (document.activeElement === document.body || !document.activeElement) {
+            document.body.focus();
+        }
+    });
+    
+    // Add touch listener for mobile devices
+    document.addEventListener('touchstart', () => {
+        if (document.activeElement === document.body || !document.activeElement) {
+            document.body.focus();
+        }
+    });
+};
+
+// Call this function when DOM is loaded
+document.addEventListener('DOMContentLoaded', () => {
+    MobileUtils.ensureKeyboardFocus();
+});

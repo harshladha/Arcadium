@@ -445,20 +445,20 @@ function undoMove() {
 
 // Mobile control functions
 function mobileSwipe(direction) {
-    if (gameState.gameOver || gameState.won) return;
+    if (!game || game.gameOver) return;
     
     switch (direction) {
         case 'up':
-            moveUp();
+            game.move('up');
             break;
         case 'down':
-            moveDown();
+            game.move('down');
             break;
         case 'left':
-            moveLeft();
+            game.move('left');
             break;
         case 'right':
-            moveRight();
+            game.move('right');
             break;
     }
 }

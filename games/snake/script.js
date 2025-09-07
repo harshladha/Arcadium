@@ -16,7 +16,7 @@ function showDifficultySelection() {
     document.getElementById('gameMain').style.display = 'none';
     document.getElementById('gameOverModal').style.display = 'none';
     document.getElementById('pauseModal').style.display = 'none';
-    
+
     if (window.currentGame) {
         window.currentGame.stopGame();
     }
@@ -26,16 +26,16 @@ function showDifficultySelection() {
 document.addEventListener('DOMContentLoaded', () => {
     const menuBtn = document.getElementById('menu-btn');
     const menuDropdown = document.getElementById('menu-dropdown');
-    
+
     menuBtn.addEventListener('click', (e) => {
         e.stopPropagation();
         menuDropdown.classList.toggle('show');
     });
-    
+
     document.addEventListener('click', () => {
         menuDropdown.classList.remove('show');
     });
-    
+
     menuDropdown.addEventListener('click', (e) => {
         e.stopPropagation();
     });
@@ -46,22 +46,22 @@ class SnakeGame {
         this.difficulty = difficulty;
         this.canvas = document.getElementById('gameCanvas');
         this.ctx = this.canvas.getContext('2d');
-        
+
         // Difficulty settings
         this.settings = {
             easy: { gridSize: 20, speed: 200, canvasSize: 400 },
             medium: { gridSize: 25, speed: 150, canvasSize: 500 },
             hard: { gridSize: 30, speed: 100, canvasSize: 600 }
         };
-        
+
         this.currentSettings = this.settings[difficulty];
         this.tileCount = this.currentSettings.gridSize;
         this.tileSize = this.currentSettings.canvasSize / this.tileCount;
-        
+
         // Set canvas size
         this.canvas.width = this.currentSettings.canvasSize;
         this.canvas.height = this.currentSettings.canvasSize;
-        
+
         // Game state
         this.snake = [{ x: 10, y: 10 }];
         this.food = {};
@@ -71,32 +71,38 @@ class SnakeGame {
         this.isGameActive = false;
         this.isPaused = false;
         this.gameLoop = null;
-        
+
         this.init();
     }
-    
+
     init() {
         this.generateFood();
         this.updateDisplay();
         this.setupControls();
         this.draw();
-        
+
         // Load high score
         const highScoreKey = `snake-${this.difficulty}-high-score`;
         const highScore = localStorage.getItem(highScoreKey) || '0';
         document.getElementById('highScore').textContent = highScore;
-        
+
         // Track game start
         if (typeof Stats !== 'undefined') {
             Stats.trackSnake('gameStart', { difficulty: this.difficulty });
         }
     }
-    
+
     setupControls() {
-        document.addEventListener('keydown', (e) => {
+        // Remove existing event listener if it exists
+        if (this.keydownHandler) {
+            document.removeEventListener('keydown', this.keydownHandler);
+        }
+
+        // Create new event handler
+        this.keydownHandler = (e) => {
             if (!this.isGameActive || this.isPaused) return;
-            
-            switch(e.code) {
+
+            switch (e.code) {
                 case 'ArrowUp':
                     e.preventDefault();
                     if (this.dy === 0) {
@@ -132,32 +138,35 @@ class SnakeGame {
                     }
                     break;
             }
-        });
+        };
+
+        // Add the event listener
+        document.addEventListener('keydown', this.keydownHandler);
     }
-    
+
     startGame() {
         this.isGameActive = true;
         this.isPaused = false;
         document.getElementById('pauseBtn').style.display = 'inline-block';
         this.gameLoop = setInterval(() => this.update(), this.currentSettings.speed);
     }
-    
+
     pauseGame() {
         if (!this.isGameActive) return;
-        
+
         this.isPaused = true;
         clearInterval(this.gameLoop);
         document.getElementById('pauseModal').style.display = 'flex';
     }
-    
+
     resumeGame() {
         if (!this.isGameActive) return;
-        
+
         this.isPaused = false;
         document.getElementById('pauseModal').style.display = 'none';
         this.gameLoop = setInterval(() => this.update(), this.currentSettings.speed);
     }
-    
+
     stopGame() {
         this.isGameActive = false;
         this.isPaused = false;
@@ -165,20 +174,25 @@ class SnakeGame {
             clearInterval(this.gameLoop);
             this.gameLoop = null;
         }
+
+        // Remove event listener to prevent memory leaks
+        if (this.keydownHandler) {
+            document.removeEventListener('keydown', this.keydownHandler);
+        }
     }
-    
+
     update() {
         if (!this.isGameActive || this.isPaused) return;
-        
+
         // Move snake
         const head = { x: this.snake[0].x + this.dx, y: this.snake[0].y + this.dy };
-        
+
         // Check wall collision
         if (head.x < 0 || head.x >= this.tileCount || head.y < 0 || head.y >= this.tileCount) {
             this.gameOver();
             return;
         }
-        
+
         // Check self collision
         for (let segment of this.snake) {
             if (head.x === segment.x && head.y === segment.y) {
@@ -186,15 +200,15 @@ class SnakeGame {
                 return;
             }
         }
-        
+
         this.snake.unshift(head);
-        
+
         // Check food collision
         if (head.x === this.food.x && head.y === this.food.y) {
             this.score += 10;
             this.generateFood();
             this.updateDisplay();
-            
+
             // Track food eaten
             if (typeof Stats !== 'undefined') {
                 Stats.trackSnake('foodEaten', { score: this.score });
@@ -202,43 +216,43 @@ class SnakeGame {
         } else {
             this.snake.pop();
         }
-        
+
         this.draw();
     }
-    
+
     generateFood() {
         let foodPosition;
-        
+
         do {
             foodPosition = {
                 x: Math.floor(Math.random() * this.tileCount),
                 y: Math.floor(Math.random() * this.tileCount)
             };
         } while (this.snake.some(segment => segment.x === foodPosition.x && segment.y === foodPosition.y));
-        
+
         this.food = foodPosition;
     }
-    
+
     draw() {
         // Clear canvas
         this.ctx.fillStyle = '#001D3D';
         this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
-        
+
         // Draw grid
         this.drawGrid();
-        
+
         // Draw snake
         this.ctx.fillStyle = '#4CAF50';
         for (let i = 0; i < this.snake.length; i++) {
             const segment = this.snake[i];
-            
+
             // Head is slightly different color
             if (i === 0) {
                 this.ctx.fillStyle = '#66BB6A';
             } else {
                 this.ctx.fillStyle = '#4CAF50';
             }
-            
+
             this.ctx.fillRect(
                 segment.x * this.tileSize + 1,
                 segment.y * this.tileSize + 1,
@@ -246,7 +260,7 @@ class SnakeGame {
                 this.tileSize - 2
             );
         }
-        
+
         // Draw food
         this.ctx.fillStyle = '#FF5722';
         this.ctx.fillRect(
@@ -255,7 +269,7 @@ class SnakeGame {
             this.tileSize - 2,
             this.tileSize - 2
         );
-        
+
         // Add food glow effect
         this.ctx.shadowColor = '#FF5722';
         this.ctx.shadowBlur = 10;
@@ -267,18 +281,18 @@ class SnakeGame {
         );
         this.ctx.shadowBlur = 0;
     }
-    
+
     drawGrid() {
         this.ctx.strokeStyle = '#003566';
         this.ctx.lineWidth = 1;
-        
+
         for (let i = 0; i <= this.tileCount; i++) {
             // Vertical lines
             this.ctx.beginPath();
             this.ctx.moveTo(i * this.tileSize, 0);
             this.ctx.lineTo(i * this.tileSize, this.canvas.height);
             this.ctx.stroke();
-            
+
             // Horizontal lines
             this.ctx.beginPath();
             this.ctx.moveTo(0, i * this.tileSize);
@@ -286,35 +300,35 @@ class SnakeGame {
             this.ctx.stroke();
         }
     }
-    
+
     updateDisplay() {
         document.getElementById('score').textContent = this.score;
         document.getElementById('length').textContent = this.snake.length;
     }
-    
+
     gameOver() {
         this.stopGame();
-        
+
         // Check for high score
         const highScoreKey = `snake-${this.difficulty}-high-score`;
         const currentHighScore = parseInt(localStorage.getItem(highScoreKey) || '0');
         const isNewHighScore = this.score > currentHighScore;
-        
+
         if (isNewHighScore) {
             localStorage.setItem(highScoreKey, this.score.toString());
             document.getElementById('highScore').textContent = this.score;
         }
-        
+
         // Show game over modal
         document.getElementById('finalScore').textContent = this.score;
         document.getElementById('finalLength').textContent = this.snake.length;
-        document.getElementById('finalDifficulty').textContent = 
+        document.getElementById('finalDifficulty').textContent =
             this.difficulty.charAt(0).toUpperCase() + this.difficulty.slice(1);
         document.getElementById('newHighScore').style.display = isNewHighScore ? 'block' : 'none';
         document.getElementById('gameOverModal').style.display = 'flex';
-        
+
         document.getElementById('pauseBtn').style.display = 'none';
-        
+
         // Track game end
         if (typeof Stats !== 'undefined') {
             Stats.trackSnake('gameEnd', {
@@ -331,10 +345,10 @@ class SnakeGame {
 function startGame(difficulty) {
     document.getElementById('difficultySelection').style.display = 'none';
     document.getElementById('gameMain').style.display = 'block';
-    
+
     window.currentGame = new SnakeGame(difficulty);
     window.currentDifficulty = difficulty;
-    
+
     // Auto-start the game after a short delay
     setTimeout(() => {
         window.currentGame.startGame();
@@ -360,10 +374,10 @@ function resumeGame() {
 
 function changeDirection(direction) {
     if (!window.currentGame || !window.currentGame.isGameActive || window.currentGame.isPaused) return;
-    
+
     const game = window.currentGame;
-    
-    switch(direction) {
+
+    switch (direction) {
         case 'up':
             if (game.dy === 0) {
                 game.dx = 0;
@@ -395,7 +409,7 @@ function changeDirection(direction) {
 document.addEventListener('DOMContentLoaded', () => {
     // Show difficulty selection by default
     showDifficultySelection();
-    
+
     // Add swipe support for mobile
     if (window.mobileUtils && window.mobileUtils.isMobile) {
         const gameCanvas = document.getElementById('gameCanvas');
